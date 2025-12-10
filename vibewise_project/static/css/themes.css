@@ -1,0 +1,349 @@
+:root {
+  /* Header Specific Variables */
+  --header-gradient-start: #1db954;
+  --header-gradient-end: #191414;
+  --logo-gradient-start: #ffffff;
+  --logo-gradient-end: #e0e0e0;
+  --nav-text-color: rgba(255, 255, 255, 0.9);
+  --nav-underline-color: #ffffff;
+  --theme-toggle-glow: rgba(29, 185, 84, 0.7);
+}
+
+/* Dark Theme (Default) */
+[data-theme="dark"] {
+    --primary-color: #1db954;
+    --secondary-color: #191414;
+    --accent-color: #1ed760;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --bg-primary: #121212;
+    --bg-secondary: #181818;
+    --bg-tertiary: #282828;
+    --border-color: #404040;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --note-color-1: rgba(29, 185, 84, 0.2); /* Spotify green */
+    --note-color-2: rgba(255, 255, 255, 0.15);
+    --note-color-3: rgba(100, 100, 255, 0.1);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --primary-color: #1db954;
+    --secondary-color: #ffffff;
+    --accent-color: #1ed760;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --border-color: #dee2e6;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --note-color-1: rgba(29, 185, 84, 0.15);
+    --note-color-2: rgba(0, 0, 0, 0.1);
+    --note-color-3: rgba(255, 107, 107, 0.1);
+    --header-gradient-start: #f8f9fa;
+    --header-gradient-end: #e9ecef;
+    --logo-gradient-start: #191414;
+    --logo-gradient-end: #333333;
+    --nav-text-color: rgba(0, 0, 0, 0.8);
+    --nav-underline-color: #1db954;
+    --theme-toggle-glow: rgba(25, 20, 20, 0.2);
+}
+
+/* Theme-specific adjustments */
+[data-theme="light"] .header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active {
+    background-color: var(--bg-tertiary);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-theme="light"] .btn-secondary {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-theme="light"] .auth-divider::before {
+    background-color: var(--border-color);
+}
+
+[data-theme="light"] .auth-divider span {
+    background-color: var(--bg-secondary);
+}
+
+[data-theme="light"] .form-group input {
+    background-color: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.1);
+}
+
+[data-theme="light"] .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* High Contrast Theme */
+[data-theme="high-contrast"] {
+    --primary-color: #00ff00;
+    --secondary-color: #000000;
+    --accent-color: #00cc00;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --bg-tertiary: #222222;
+    --border-color: #ffffff;
+    --shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="high-contrast"] .btn-primary {
+    background-color: var(--primary-color);
+    color: #000000;
+    border: 2px solid var(--primary-color);
+}
+
+[data-theme="high-contrast"] .btn-secondary {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+[data-theme="high-contrast"] .nav-link:hover,
+[data-theme="high-contrast"] .nav-link.active {
+    background-color: var(--primary-color);
+    color: #000000;
+}
+
+/* Colorful Theme */
+[data-theme="colorful"] {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ff8e8e;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --bg-primary: #ecf0f1;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f8f9fa;
+    --border-color: #bdc3c7;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="colorful"] .hero h2 {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="colorful"] .logo h1 {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="colorful"] .about-card:nth-child(1) {
+    border-left: 4px solid #ff6b6b;
+}
+
+[data-theme="colorful"] .about-card:nth-child(2) {
+    border-left: 4px solid #4ecdc4;
+}
+
+[data-theme="colorful"] .about-card:nth-child(3) {
+    border-left: 4px solid #45b7d1;
+}
+
+[data-theme="colorful"] .about-card:nth-child(4) {
+    border-left: 4px solid #f39c12;
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+    --primary-color: #00ffff;
+    --secondary-color: #000011;
+    --accent-color: #ff00ff;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --bg-primary: #000011;
+    --bg-secondary: #001122;
+    --bg-tertiary: #002233;
+    --border-color: #00ffff;
+    --shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+}
+
+[data-theme="neon"] .btn-primary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+[data-theme="neon"] .btn-primary:hover {
+    background-color: var(--primary-color);
+    color: #000011;
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+[data-theme="neon"] .hero h2 {
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--primary-color);
+}
+
+[data-theme="neon"] .logo h1 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+[data-theme="neon"] .nav-link:hover,
+[data-theme="neon"] .nav-link.active {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+[data-theme="neon"] .mood-display span {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+[data-theme="neon"] .playlist-item:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+/* Theme transition animation */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Theme toggle button states */
+[data-theme="dark"] .theme-toggle::after {
+    content: "🌙";
+}
+
+[data-theme="light"] .theme-toggle::after {
+    content: "☀️";
+}
+
+[data-theme="high-contrast"] .theme-toggle::after {
+    content: "🔳";
+}
+
+[data-theme="colorful"] .theme-toggle::after {
+    content: "🌈";
+}
+
+[data-theme="neon"] .theme-toggle::after {
+    content: "⚡";
+}
+
+.theme-toggle {
+    font-size: 0 !important;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.theme-toggle::after {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Accessibility improvements for themes */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #00ff00;
+        --text-primary: #ffffff;
+        --bg-primary: #000000;
+        --border-color: #ffffff;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --primary-color: #1db954;
+        --text-primary: #000000;
+        --text-secondary: #666666;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-tertiary: #e9ecef;
+        --border-color: #dee2e6;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Music notes background */
+.music-note {
+    animation: subtleScale 4s ease-in-out infinite;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+    position: fixed;
+    opacity: 0.15;
+    z-index: -1;
+    font-size: 24px;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+.music-note:nth-child(3n+1) {
+  color: var(--note-color-1);
+}
+.music-note:nth-child(3n+2) {
+  color: var(--note-color-2);
+}
+.music-note:nth-child(3n+3) {
+  color: var(--note-color-3);
+}
+
+/* Dark theme notes */
+[data-theme="dark"] .music-note {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Light theme notes */
+[data-theme="light"] .music-note {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* High contrast theme notes */
+[data-theme="high-contrast"] .music-note {
+  color: rgba(0, 255, 0, 0.4);
+  opacity: 0.3;
+}
+
+/* Colorful theme notes */
+[data-theme="colorful"] .music-note {
+  color: rgba(255, 107, 107, 0.3);
+}
+
+/* Neon theme notes */
+[data-theme="neon"] .music-note {
+  color: rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes subtleScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}

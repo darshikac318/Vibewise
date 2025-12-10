@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeWise - Mood-Based Playlist Recommendation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="VibeWise">
+                <h1>VibeWise</h1>
+            </div>
+            
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li class="nav-item" id="loginNavItem"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li class="nav-item" id="profileNavItem" style="display: none;"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <span id="userNameDisplay" style="display: none; margin-right: 1rem; color: var(--primary-color); font-weight: 600;"></span>
+                <button id="logoutBtn" class="btn-logout" style="display: none;">Logout</button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Discover Music That Matches Your Mood</h2>
+                <p>Let AI detect your emotions and create the perfect Spotify playlist</p>
+                <button class="btn-primary" id="startDetectionBtn">Start Detection</button>
+            </div>
+        </section>
+
+        <!-- Camera Section -->
+        <section class="camera-section" id="cameraSection" style="display: none;">
+            <div class="container">
+                <h3>Mood Detection</h3>
+                <div class="camera-container" id="videoContainer" style="display: none;">
+                    <video id="video" autoplay playsinline style="width: 100%; max-width: 640px; border-radius: 12px;"></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                </div>
+
+                <div class="camera-controls" style="margin-top: 1rem;">
+                    <button class="btn-primary" id="detectButton">Detect Mood</button>
+                    <button class="btn-secondary" id="stopCamera" style="display: none;">Stop Camera</button>
+                </div>
+
+                <div id="loadingIndicator" style="display: none; text-align: center; margin-top: 20px;">
+                    <p style="color: var(--primary-color); font-weight: 500;">🔍 Analyzing your mood...</p>
+                </div>
+
+                <div id="errorMessage" class="error" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="container">
+                <div id="moodResult" style="display: none;"></div>
+                <div id="playlistContainer" style="display: none;">
+                    <h3>Your Mood-Based Playlist</h3>
+                    <div id="playlistContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" style="padding: 4rem 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem;">How It Works</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>📸 Capture</h3>
+                        <p>Allow camera access and let our AI analyze your facial expression</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>🎭 Detect</h3>
+                        <p>Advanced emotion recognition identifies your current mood</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>🎵 Create</h3>
+                        <p>Get a personalized Spotify playlist matching your emotional state</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Load scripts in correct order -->
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/authCheck.js' %}"></script>
+    <script src="{% static 'js/camera.js' %}"></script>
+    
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Homepage loaded');
+            
+            // Wait for auth manager to fully initialize
+            let authReady = false;
+            let attempts = 0;
+            
+            while (!authReady && attempts < 20) {
+                if (window.authManager && window.authManager.checkInProgress === false) {
+                    authReady = true;
+                    console.log('Auth manager is ready');
+                } else {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                }
+            }
+            
+            // Check if we should auto-start camera (after login)
+            if (window.AuthCheck) {
+                AuthCheck.checkAutoStart();
+            }
+            
+            // Setup start detection button
+            const startBtn = document.getElementById('startDetectionBtn');
+            if (startBtn) {
+                startBtn.onclick = async function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('=== Start Detection Clicked ===');
+                    
+                    // CRITICAL: Force recheck auth status
+                    if (!window.authManager) {
+                        console.error('Auth manager not available!');
+                        alert('Please refresh the page and try again.');
+                        return false;
+                    }
+                    
+                    console.log('Rechecking auth status...');
+                    const isAuthenticated = await window.authManager.requireAuth();
+                    
+                    // STOP HERE if not authenticated
+                    if (!isAuthenticated) {
+                        console.log('❌ Authentication failed - BLOCKING camera access');
+                        return false; // EXIT - DO NOT PROCEED
+                    }
+                    
+                    // Only reach here if authenticated
+                    console.log('✓ User authenticated, proceeding with camera');
+                    
+                    // Show camera section
+                    const cameraSection = document.getElementById('cameraSection');
+                    if (cameraSection) {
+                        cameraSection.style.display = 'block';
+                        cameraSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    
+                    // Start camera
+                    if (window.startCamera) {
+                        try {
+                            await startCamera();
+                            
+                            const stopBtn = document.getElementById('stopCamera');
+                            if (stopBtn) {
+                                stopBtn.style.display = 'inline-block';
+                            }
+                        } catch (error) {
+                            console.error('Failed to start camera:', error);
+                            alert('Failed to access camera. Please check permissions.');
+                        }
+                    } else {
+                        console.error('startCamera function not found!');
+                        alert('Camera functionality not available. Please refresh the page.');
+                    }
+                    
+                    return false; // Prevent any default action
+                };
+            }
+        });
+    </script>
+</body>
+</html>

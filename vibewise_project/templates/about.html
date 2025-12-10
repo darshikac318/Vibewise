@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - VibeWise</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+    <header>
+        {% include 'includes/header.html' %}
+    </header>
+
+    <main class="main">
+        <section class="about-hero">
+            <div class="container">
+                <h2>About VibeWise</h2>
+                <p>Revolutionizing music discovery through AI-powered emotion detection</p>
+            </div>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>🎵 How It Works</h3>
+                        <p>Our advanced AI analyzes your facial expressions in real-time to detect your current mood and emotional state. Based on this analysis, we curate personalized playlists that match your vibe.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3>🤖 AI Technology</h3>
+                        <p>Powered by TensorFlow.js and Face-API.js, our emotion detection system can identify happiness, sadness, anger, surprise, and neutral states with high accuracy.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3>🎧 Music Integration</h3>
+                        <p>Seamlessly integrated with Spotify API to provide instant access to millions of songs. Create playlists, save favorites, and discover new music that resonates with your mood.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3>🔒 Privacy First</h3>
+                        <p>Your privacy is our priority. All emotion detection happens locally in your browser. No facial data is stored or transmitted to our servers.</p>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h3>Features</h3>
+                    <ul class="features-list">
+                        <li>Real-time emotion detection</li>
+                        <li>AI-curated playlists</li>
+                        <li>Spotify integration</li>
+                        <li>Dark/Light theme support</li>
+                        <li>Responsive design</li>
+                        <li>Privacy-focused</li>
+                    </ul>
+                </div>
+
+                <div class="tech-stack">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-grid">
+                        <span class="tech-item">TensorFlow.js</span>
+                        <span class="tech-item">Face-API.js</span>
+                        <span class="tech-item">Spotify Web API</span>
+                        <span class="tech-item">JavaScript ES6+</span>
+                        <span class="tech-item">CSS3</span>
+                        <span class="tech-item">HTML5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

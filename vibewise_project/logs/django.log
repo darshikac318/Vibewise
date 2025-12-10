@@ -1,0 +1,835 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\darshika\OneDrive\Desktop\vibewise\vibewise_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/css/style.css HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/css/themes.css HTTP/1.1" 304 0
+"GET /static/css/responsive.css HTTP/1.1" 304 0
+"GET /static/assets/images/logo.png HTTP/1.1" 304 0
+"GET /static/js/utils.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /static/js/moodDetection.js HTTP/1.1" 304 0
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/js/playlist.js HTTP/1.1" 304 0
+"GET /static/js/spotify.js HTTP/1.1" 304 0
+"GET /static/js/main.js HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 200 21753
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2955
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/css/auth.css HTTP/1.1" 304 0
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3012
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3066
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2955
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3012
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2955
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/css/components.css HTTP/1.1" 200 10937
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/js/spotify.js HTTP/1.1" 200 0
+"GET /static/js/moodDetection.js HTTP/1.1" 200 3077
+"GET /static/js/playlist.js HTTP/1.1" 200 4920
+"GET /static/js/camera.js HTTP/1.1" 200 8957
+"GET /static/js/auth.js HTTP/1.1" 200 21736
+"GET /static/js/main.js HTTP/1.1" 200 4365
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET / HTTP/1.1" 200 5745
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+"GET /callback/?code=AQA7jNCjQCY8h3pUO4NRwnUEgHA9emiaywEK7vrbodYW7uSuq_CosupX43nsx-YM-8SVCsFSOck75UuVR5h5mCmfbVOM54L2LJu3bJFOPR8GJUxLDTDqGDuGLh6LfEhdrBYDR80x7k5JkXr18ABKEsLlLupTHTjsDPdl3aJohyAnnBzTBVaVMKqnKAlolfLXA2WCwxz2G_i0DGPKe6zK2q83eZ9xJfGr4j5nVkqz0fVXEEHHLFezliSBqlfq-KtHTjtpzWSZqiX1fZwYxtFdtO4IllN6WC2zoOurCtCFgBmLDJ7bfz0kATGaqknoDvE HTTP/1.1" 200 4590
+Forbidden: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 403 58
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /callback/?code=AQCiuS1lkdZ-0IJTcsQjHUnMlMvi2FzLLShlS86F1a_TnEt0EsqMj83yxDybpTCZHzxJE6loGv72srnCIBzGB5mvKw3Jlkf8USAwtyo2Qw6Prr4daJtrNRi0_YaGZRdkqKrCdVjYEis8-Om-VVV_l3yEE8TjWUWYTTnUYQgHefcnOAeMu8KhRm0Sys95Owf-vr0G3sTOJKrcfLcycTtTONWUYD_EPu9zlc2iuzQwAxYiwGZ51BkGmAifQ_yvT0R6pn-wzYiden5ou0EFmUIf1cd3kRwHNYiO-jQJG21caEYMaaPHATDEIRjWlricMK4 HTTP/1.1" 200 4590
+Forbidden: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 403 58
+"GET /login/ HTTP/1.1" 200 9535
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3138
+"GET / HTTP/1.1" 200 5745
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /callback/?code=AQBwPAA63-XajdM_LoiC89cBsuXGE22xZN5wIAymWvGcyCrFeDS2zpmBEFbneqQJ-WgWX7A1exP73Hb92gTYQ39VAKTnD7-hgtBk1k4HKtUD2rp9rpVKLfbyCByT8Ze0mpaUf-5zJfQF2jw9DTew9Hfuc0dIbtrC_NhvZwIoFMRqWE3w3HZA4Jg6eXWHXA5aXkd6EjGSgcGf73-JEgiTInjsrqRv2B2bZJgI7afuqq4KskY9MvcAA04w2flnu9-0dMBY5r-F9FZ_4dU_C1fWeAojAgptGqP1TgwTgdof0e9DGcaCIwB6Ja1HkmfZqq8 HTTP/1.1" 200 4590
+Forbidden: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 403 58
+"GET /login/ HTTP/1.1" 200 9535
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 200 11048
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 5745
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+"GET /static/css/components.css HTTP/1.1" 200 10937
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/js/spotify.js HTTP/1.1" 200 0
+"GET /static/js/moodDetection.js HTTP/1.1" 200 3077
+"GET /static/js/playlist.js HTTP/1.1" 200 4920
+"GET /static/js/camera.js HTTP/1.1" 200 11048
+"GET /static/js/main.js HTTP/1.1" 200 4365
+"GET /static/js/auth.js HTTP/1.1" 200 21736
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET / HTTP/1.1" 200 5745
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /static/frontend/libs/tensorflow.min.js HTTP/1.1" 404 1953
+"GET /static/frontend/libs/face-api.min.js HTTP/1.1" 404 1947
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+"GET /callback/?code=AQDQueecCM4G4QM_FhCedQTRCv6znViwJ4fsG9SqTD7cWFIz2wMVFEoh1DsrhYoWspBeymz8LBV-abdkE_OT2sQei1PODiFKb_BjKSM1k_7sLkBrNuy-P7otewWQ2Y3t3RTkZwyGOC1pYBQExe9SD6CbTpvEscqnDSCiysz-TFpuWtjaZ7KiQwUOArBaRtBTpQIMfa4HJjLbdPENDKtFQ1O-Hc8vT4sxAPW6AvLpBeF56v5WpO1eMDRXD1GRy6oeWQTfFUELgoT9DiA_Dm31UxStB63FUmPv1O7r722-PD8xYNib55N4-L2gIhDaujI HTTP/1.1" 200 9068
+Forbidden: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 403 58
+"GET /login/ HTTP/1.1" 200 9535
+"GET /callback/?code=AQCELCabEIS1320E7eBjLhRrVh6qFvDMUY4yVs7fUbbGSfe3O9UDWRmwMcwQwIJGUTafvvZqZMtjZ29UmBY1dUy_MobeJoIFdZDoox0LbzZLICAa704dpTuuZTqTTe-BgxQWOE5UNHg8No3eJ_Syg82RZCXN-pyqERds8eYFzVo_Ah5wawywZIw9R8Ze4ntJznfrYUm123qfQA20c2u2DSXGs6VZgT5WleEuPZ8REHrEHOVQklEhwnQd1Yxyzl7yUJqBFQf_hw_xjRuL1Mh_aQCM2FxguZxLgkbSgpc5SPezl7AFQ1IQlzenfY6r-Ng HTTP/1.1" 200 9068
+Forbidden: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 403 58
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6006
+"GET /static/js/camera.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET / HTTP/1.1" 200 6006
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+Forbidden: /api/mood/detect/
+"POST /api/mood/detect/ HTTP/1.1" 403 58
+Forbidden: /api/mood/detect/
+"POST /api/mood/detect/ HTTP/1.1" 403 58
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6006
+"GET /static/js/camera.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /callback/?code=AQCeatBT89yTsdS2f6mwVS1AUe69s-cB3CjK1elMJgPLb6iFduv-KGgvS1qloFMKUAZ1zXD0__YTs5-xmxHUtam8lL9uWfNsNXqMoCpTb-kcHTV4jT7zBoj9ortzyVcMiW5Zquj0ACnpdOewoufpcGYhNhBHKFS55zW4tJQYu95TKJOrhKjrSTGvsYpkQfcg-lx_bHDUllbLKXR_VLXOYdb-TTkOAG1QV_djJaCDrBu_SUu0n4YGgDheajOM0ipwUoHJCb2gKDtXD4lmzC9xKVXBvNqHmJXPcxD2KVOJxPoFIpF2VGonpw_bL8Ol0bg HTTP/1.1" 200 9068
+"POST /api/spotify/connect/ HTTP/1.1" 200 544
+"GET / HTTP/1.1" 200 6006
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3138
+"GET /login/ HTTP/1.1" 200 9535
+"GET /callback/?code=AQADHshPW29SxYKWvv5Cr1p1Z2l8MkS6haN8_y6e6TeeIJg9QzZbTrKA3_fY_IYqFZC4tKvmNBUOlTAEfUgVKHfnyeCXfY03s5hGRk8y0Rai8hnO1voH8KigrVYFyN0TtvP2b7z_uIRwlpWSculu0E00tjO0ErDmioqOOE_z6dS1kqyA3cNXnXegU3tOOjBf01HfKJTSLRKAx4vq6ReLsjWxRxViQvwFr0AlUXj3O1f7CkQYoFb9772tqvEoM1TzsyHpQ1RgSHj-kphk4350vAKhA9xvC520I0sfU6p2kfJRaoyjnof5GMhDRx9mdsE HTTP/1.1" 200 9068
+"POST /api/spotify/connect/ HTTP/1.1" 200 544
+"GET / HTTP/1.1" 200 6006
+"GET /login/ HTTP/1.1" 200 9535
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3138
+"GET / HTTP/1.1" 200 6006
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /about/ HTTP/1.1" 200 4544
+"GET /login/ HTTP/1.1" 200 9535
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3138
+"GET / HTTP/1.1" 200 6006
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6006
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /profile/ HTTP/1.1" 200 9347
+Not Found: /profile/assets/images/logo.png
+"GET /profile/assets/images/logo.png HTTP/1.1" 404 3138
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6461
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6461
+"GET /static/css/components.css HTTP/1.1" 200 10937
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13225
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/spotify.js HTTP/1.1" 200 0
+"GET /static/js/auth.js HTTP/1.1" 200 21736
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+"GET /static/js/main.js HTTP/1.1" 200 417
+"GET /callback/?code=AQA-edXFkFvzKrIaEKkhd9T3h9PvcJSm15nMHbrMhM7E_bOGA4dgyI3F72SKBeThUGBQDoMuqSCTlX2dnMjPGe4vAWga3Tq_17-x1MbHCa43MeKR2dGbPI4vwkhebIGEBWkGtaBz7Ui2xeZlbePQbTBw4-o5Kj887ohy2mO1M_7-QvRX55c9jcgs_avm7s6HSt0OVOLFFajkBptHhKQMVfeGwW57iYvj72pWVIaLPo_nwib-F0pUqX1K0vVw3t2L1xAIHJ3daeL0D03z4ruqZCOtnN3e2mw8DR3TnktsIdhvTHoQktszEtusnU7cGHU HTTP/1.1" 200 9456
+"POST /api/spotify/connect/ HTTP/1.1" 200 544
+"GET / HTTP/1.1" 200 6461
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 43
+"POST /api/spotify/create_playlist/ HTTP/1.1" 200 333
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"GET / HTTP/1.1" 200 6461
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /login/ HTTP/1.1" 200 9535
+"GET / HTTP/1.1" 200 6461
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6461
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/spotify/create_playlist/ HTTP/1.1" 200 336
+"GET /login/ HTTP/1.1" 200 9535
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"GET / HTTP/1.1" 200 6461
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6461
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+Internal Server Error: /api/mood/detect/
+"POST /api/mood/detect/ HTTP/1.1" 500 33
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+Internal Server Error: /api/spotify/create_playlist/
+"POST /api/spotify/create_playlist/ HTTP/1.1" 500 180
+"GET /login/ HTTP/1.1" 200 9535
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/main.js HTTP/1.1" 304 0
+"GET / HTTP/1.1" 200 6461
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6461
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /about/ HTTP/1.1" 200 4544
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /login/ HTTP/1.1" 200 9535
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /login/ HTTP/1.1" 200 9535
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET / HTTP/1.1" 200 6461
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"GET / HTTP/1.1" 200 6461
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7060
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"GET /login/ HTTP/1.1" 200 10056
+"GET /callback/?code=AQCLJn79fUDQuAt_I3pLM1cVI4TPOkvQ6IIXDphocnx5uePL7I5fwWxhwCFPZWj76jSWVV_-GdI5dkbKjI93rbNSCCNur6fjcbG6q0yC4vxQTXW-vSw61QjXJg2XKOEZJMQZYL_O7kknlEZ0uytb8VhlH5sMxwBVYIHxrLDdIz2IfzFJFzQ__JpOTE79SZjCNK0ZuHdB0MgZWgKjFyMI4Kba6YLph0VcTatZ7em_thKNCsK1QYrqO7qFIb2pCdfoWlUzsjuANSZ3rfZYzBMo5-YP_FmIBbfzUCnIt9Wb5km7tYPZlif6ROwYDM3H810 HTTP/1.1" 200 10933
+"POST /api/spotify/connect/ HTTP/1.1" 200 544
+"GET /profile/ HTTP/1.1" 200 13134
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"GET / HTTP/1.1" 200 7060
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+Internal Server Error: /api/mood/detect/
+"POST /api/mood/detect/ HTTP/1.1" 500 33
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 47
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/mood/detect/ HTTP/1.1" 200 47
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 47
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 46
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"POST /api/mood/detect/ HTTP/1.1" 200 44
+"POST /api/spotify/create_playlist/ HTTP/1.1" 200 336
+"GET /login/ HTTP/1.1" 200 10056
+"GET / HTTP/1.1" 200 7060
+"GET /about/ HTTP/1.1" 200 5072
+"GET / HTTP/1.1" 200 7060
+"GET /login/ HTTP/1.1" 200 10056
+"GET /login/ HTTP/1.1" 200 10056
+"GET /login/ HTTP/1.1" 200 10056
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7060
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 200 13478
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /login/ HTTP/1.1" 200 10056
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET / HTTP/1.1" 200 7060
+"GET /api/spotify/status/ HTTP/1.1" 200 33
+"POST /api/mood/detect/ HTTP/1.1" 200 49
+Internal Server Error: /api/spotify/create_playlist/
+"POST /api/spotify/create_playlist/ HTTP/1.1" 500 180
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7198
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 6951
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /about/ HTTP/1.1" 200 5072
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/main.js HTTP/1.1" 200 417
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 7198
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /profile/ HTTP/1.1" 200 13134
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 7198
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQCj6685KfgAj83CU5Sbj7rQGH3VlNhN8Hq00sSG71P9UJJOsSwJHChU0g4ZxmRfMmI1gnr214jBkR1KobQzIQVpbyzOK4taz07q6DD-Fhss0P3jk0PjATgqSOYj6oGV_5Pl-GjE2rrJGdaxRTPjuPQZ7z9_KJSMTQm2f89l4AzBxr1jh1rgakTWzKUx-yHQNsTLUr5wNv9TY7Mfj5j_1HLieP5KsvYmBnwOCEHFP8mPLu7PF4KQhATeZKuNVj-VNanvP0v8YwJY5kBMrJFWgzsZSdBfjeVmKxWF5lMzptKyzZ_Zv5UpRxLt_tNJheC7u4FhNG8N_Epk__-U-eI HTTP/1.1" 200 10933
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQDxeMWCyzoKGPhZuZtClr-F-U-bDJeRIiCEcne_l5zNK4e35uVo1oFUub-Ouq-AkiQrm3Ey15AupRv1Jvj94L8F8sbp77hWNzcBV3m7IZFXo9FD0q-zaTPy8lHn9hwIc1Lob7bHA1QaGpYLXAyD23tJfp0ESHrb97whjTZMuD6FKYBy3ahef3D7sdMnp39d-9MN4j6ZOxdbQoOjIQGRvaZYXyx8aLZPsvm_DFgib3ix_VboDqH2Dpu9orIp-2nhY_RFjfusMRxVtlVSRlhkdRlvCT_gjnEz42qf5cVR50faS2dzgLh_JC-wDYrTPelIa7tbkGdAXI5wwNhlA1g HTTP/1.1" 200 10933
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7198
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQB5vC-shG5AD28xHISqFZeGghuwJAO28jncfelTOJ3nQp7lusjVseTKKUJWZ4WHZexftY8BXgd7rUqS3hWzKGGuoUsxoWNdON6t8Wse7GWQBzGx1oSJz3inzeiIFmmJJRNg5JAntsIzVHb20mxS6gpLhiII8H8-XWN6LcEqegnHA8nq6JXVdh-EoAI1l5OdWnOOc1xck8oE-KZx1-SaZhsywipgv06mOnCPWAkJP0_CiIhrO_OJRljpT3gjvDxiC5Yg87nwXhVggdnt7lovGPAMNtDDxI-73SL0Fyg_P_3m_fm62yTKx2eI0nkt-wrPNaeQ9Gi21eHs0bebUbs HTTP/1.1" 200 10933
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 7198
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQDu3btgIaZnxlpsz0g95bIzoeFlh1QKyKIRA7XkY5SqnTPor-30osgB2kRbm1kLqnf6a1ebnzOWBYIExLHBmWdnc6ZoKg9-Yv9sJeTx10byImCs5LVNwTfdoeoZtQvNLD2Ryy2ZX0MTIpi11Y_nM9eE26_gqSYKuuPOdKyTRJLNq-5ol9tQA8RQphfnv3exIcZO3XCy0LU6viY6EB-jrQ4yjnlGYcYuMdBAcKSOqN59abVVBIIGuO4B0gRJctzMUtStZoT3GnVpB8-ytzKDqL6TRP_reRuj8sYb6_NXuTmnn_RkoB8STlk2rsQsLBloBaoIN2xL84_x7fcK1Uo HTTP/1.1" 200 10933
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 7198
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /profile/ HTTP/1.1" 200 13134
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 7198
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /about/ HTTP/1.1" 200 5072
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET / HTTP/1.1" 200 7198
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 10135
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /about/ HTTP/1.1" 200 5072
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQAaKzFUknI0BtIGGHm4r09xSzbNWA-SSbFh2NdN46dIckXiXNAqbZK-Uumt6jX89s0KPHwpipYMKeMkXLDPiERVKFmLKVqWsi0_WoHdtTCCZ0bGcwp6SlMNYNdtFqT4QrabZsTafInyEshCd4DRj6rVWOnU3AgzhjoSylTXP-iQqv8qQZkZUfkVSGecafkh-ENK8xt8ARtUMEU_Zs-3cJN_5-ATITUDmuJQNRRcOZ5pED8JInjxRvJmHqUmR5QBYF-r8Szl_3JvmenbqCgl8RnO1sDMY8VdwR0sGcE9qYJlBzsJdC_ALfrtmM8He5KtPXgZSHYrBd4bMNgeVRc HTTP/1.1" 200 10933
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQDaroWt-2LOZCUKH4TPulwOeFBm0lm35B3-H6Ri2NE9bOJj3zXHczPuMiKW-HZ-3EvTx7QBvaRNMsRQGMB2usqugQl4fL6uWtWZV0Wwoqu1fxjbEnWWzriDFaTcGDizUtSU8k4-Kc--J9eh3WL3GlPDGXG5tdS-3WtsCSZPjhUtgBUTAdLqsy-YwL5UBYJ1FbiLqF1r2Z7zhe6LhPWvHlM_6ehRAc9rFRujMxTmEn4QxwB81pSBwAVeqryJVnHz14U3XlkRXd6pVB9DRhX2zy_acimD_NsufPU2wwCEf-jl5TwZw2iH5xOAcwBeBXjDY-KqpZZJmM86Bdw0wWc HTTP/1.1" 200 10933
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7756
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQCIO07qGyiu7WJRf7OOGp_XBuTuVfC1vfJXDBipcHkxRoyDs6I-G9v9hX3S-kyqdFzryEGBE3ccnTGn3Q3Sj6ihJ6pwaw_5Pt3YIjGIW7DvUjlsoKzJpg14kRwBI_iZnJPwxBysRO8Cs-N2Cij9dqmHwq8IILNZeyJXmnmxQMGz4dUp9SJ4sv4DbrQ6D84Pm7Zx-mQq40fJUWdgHz2Rlio7d_3z7L8qrpWl3wEREUAnLv9yoiWsrC1aY5x-jiN02doEPl8Or2xsqz0cIsVtVG7Bj8SUVCb-vr1_KfTHgns1IGEuXqjx33jND2Crcc6cr8M4q3TcAoIu2-zYEow HTTP/1.1" 200 10933
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET / HTTP/1.1" 200 7756
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/auth.js HTTP/1.1" 200 6951
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQB652odc8G3ziuxJlOSyKxbpV69Oo1XCeHW3wMvbzfGfLJeHpcE4Jp33-jNAyIyXg6O0xfJuG2ofKhsNTa_wGEijGcU7_fhxoaif90NtiIHcaQQ2lK7eZ94YmFIOg6T9Uz4VdBohAD2NMs8NDxe_IpUkC7oVqLDg_TXsSKDNQOBQX9_sTZLAvc4BspoHfZxko9TV_kHV-v_nMdvJvC2BLupZYpIBJY3Usi-KLoYZ0dkmH8XNeWaSdve3dDU4oSmJlWen-rqYpz-VAFem3OTeHORIpjKCyCv1cbohFSBuL8L9luCY2vaLSlnINtSF1HLEf6zO-HMMeGR7uwuV_0 HTTP/1.1" 200 9452
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQDst9IBUe0G5T92mTt_Ef8vC0v5sSOHmSgPMXDw8EsZ6-hC4bSJHuuLtrUKQ7MyjLaINFuJSziOksBY-HQ9pdO8SRWAdjbKhkw7KCUZMBeEmD-73vkvbTb7mxK3lkg7nmSK1XxSaeB88shHk4l1VMWG2E-GL0RtLzn6VB_VxLefbTIOi3QIdhsh5iic0sZSs5FTS5fbP5HFvGtJhSSpqJczIac1GvdGZSAmk62boz3uKU76I8lwjHJbdELx0y931H6JcJH49fzKJq_4XVKvEHzM7hY1u3JZeQspkQKwwtn6IGFITEP6PEUwndqbBXiNaRtwr7bTPwLQCWXvQAM HTTP/1.1" 200 9452
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQBUMEwxo4dlhUGpqiIqy0bqCjvUa4ORCgHCuOwa8ZbbTOQAiqTOSdGt23M2QNLrfUOsz6aCNgrI7lShNaVSKH2loiEkFhWW1vNwVKMTWgkWF_5DeK8A8ZHAaqNiVdlZ3htPk2p4_rH-TmWym83wC0hgmJRU2TRnVkgasI9rHGTvThl5fwFvq3yJ38FR2y8HZBmqt6BHRqZeNmXl2kXtCou8NrkPJ2PuDdDkDoTqZTM0INFj03ORR_v8ZzFM2weWISocnt9u1PF9OhZtR4Bsi6W0VqlC8wgVgc9XDwro1Oadxx-4mJcHDnd3IIGDRcATGaQnLssETv1ICTUtQ-s HTTP/1.1" 200 4590
+"POST /api/spotify/connect/ HTTP/1.1" 200 666
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+- Broken pipe from ('127.0.0.1', 53413)
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQDRErnEDs3GSBaVslsHATW7h_nORUj5BItFcYoAqONk9jonIedzwDsH6eN-9afHTFMQd9W-FiuTE6Yp_JF81wHtrL3mrcx1m18dRNt0GPmHI9KW71QkpqmvYlQsx1LTid1hgKAYBmF_B4NrhqAHveICbPlngcik_uNTNmx22aMq_6S3ueXViI2ihnWj6jC9pLjYHsq7o_1L-4_KJPKnfESwEnp91YBCqkL22fjldVIGnbcGKwwIRfinYrTqAZqXFkbUHpB2yiYUuK4OA_KZtrJkB89hSXWMzYbKBCe3bJ4MiaAk20R0STbPtCTuzhzAOp2jKrF4hPZJq67bgv0 HTTP/1.1" 200 4590
+"POST /api/spotify/connect/ HTTP/1.1" 200 666
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7756
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 6951
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQDPQXEvoWw7mMv0yBGRTgeGW8xMnP7_zqtSpt0f8Av0vwNe5U_3yuDM5q2-hM3siBuwFOVwBFJNJI2GG0Z9cWGBIIh6hMQuTqVnvhtYdMZkUIzGDT36rMqKkYi1JMFTMUm5t1rxXrSgRjf6CYDWlOUXcHK5Myf2f0UvNjsTdUCu1SOmuTefSVQtl4WCT9c-Mk783AMzBM9KxmRoYaY3J9K5BXoT8OLBb_Seh4NfS_ZrZeCpJa4sHg3IkxJaDyr706Y-RR5KmEOBLGgfuzYygFpajWs32VBO46fZDyu_EPPeOwdczfhoJz9YBNEzXj928OxxMrpMs8xxo_52C6s HTTP/1.1" 200 4590
+"POST /api/spotify/connect/ HTTP/1.1" 200 666
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+- Broken pipe from ('127.0.0.1', 61136)
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQD1GE-zck9bB0IVmvjA6hsiLfsx6wrXISkJOPz_AbQiP-CPTYsZLl-czWlC5uOYBNaVCShqEgWV4ZO1IXLqXmPFrvXJbVB1T7BGudujDiUpbz497QRP9VDHhnKtF567o5YYqIUeGBMZ-iLPVS7dgz1wpHR_BwE-ZSdb8Zetb2TC2fl8Ig1UJhelPE_jpcmo9V1TfsNXgf_z4Vsrhb8XhcRvbMBe1TUpCjfMG3Uh5DYLEYS-2rLkp7i7xRdtB6Qg4hjK8Vc2zCm1yt89ZjwRAt-3CRvihX8RsS7aCUK4SwSOo2eZsNEer9WiNguh4eRfuX6Cc3BdZ5tYNrpQ818 HTTP/1.1" 200 4590
+"POST /api/spotify/connect/ HTTP/1.1" 200 666
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"POST /api/mood/detect/ HTTP/1.1" 200 47
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET / HTTP/1.1" 200 7756
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"POST /api/mood/detect/ HTTP/1.1" 200 43
+"POST /api/spotify/create_playlist/ HTTP/1.1" 200 485
+"GET /about/ HTTP/1.1" 200 5072
+"GET /static/js/main.js HTTP/1.1" 200 417
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7756
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+Not Found: /api/spotify/status/
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 8167
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET / HTTP/1.1" 200 8167
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 7166
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQC9HUzmDIKO2o8oJCh0hPj_hH_0qhFCjJOviNZwjcXuK53fWdLh9HZvpDEpKREbX-D-qZX-e9gNVr8QhxyyvVs7F5CoRr8yJzvTJ86CNHsHT1X_5fzQU-NPNUng2_CrwonJfgHlxuIzRkb-T3ObPxsJJjN-vWAMUfatmN6qXvy7P9rp2qld6R0Dy2veYTTALoFgFK0uYPr2ObtoyLMZVCGjKLmGqz4xUzlK97M8XM46rM5ZUUs6JIAjrtnemhKZ01smt2UHGcLxR7BUkcudI7ArlPs1wckI8U26RcqXm9sLXSGTwxLS7Wj0Egt_KyjNt2bmbldN9MAqBCob5PM HTTP/1.1" 200 9413
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/js/auth.js HTTP/1.1" 304 0
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 8167
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 7166
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+Not Found: /favicon.ico
+Not Found: /api/spotify/status/
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /callback/?code=AQDFu_Pgx82gxTcYHxHRg6BesoRjimuJeFaKrXJIPqbj93dONoaLBgouGEFfCSzNAxaiA6Oax_bCjyKyvkK4pHB72u0Xi7fQsR2-EIBEOxU85o10P0MhItNTefvyeAlb5vcLdUxBajmjM6u-MQf0wDAtCmbe8hDgJUrPUSDchZ4W79-nrUMc1SWHwVEI5GOtFUp9denHZ2nOwssS-OFDpWgyXhKJlRjXwo4po5Srx1LhW2tM6Jju1zjrbH1RTo2aFzqFwdCPDgbkl0AOZnDMP50a5u3HGbak_mcKuwg4gOrr62x7CdXdYQ4iuhFOE1xcq4-Vqx-UEEAKJISPypU HTTP/1.1" 200 4590
+"POST /api/spotify/connect/ HTTP/1.1" 200 666
+"GET / HTTP/1.1" 200 8167
+"GET /static/js/auth.js HTTP/1.1" 304 0
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET /login/ HTTP/1.1" 200 10135
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+"GET / HTTP/1.1" 200 8167
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/js/auth.js HTTP/1.1" 200 7166
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /api/spotify/status/
+"GET /api/spotify/status/ HTTP/1.1" 404 8415
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 8167
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+Not Found: /api/spotify/logout/
+"POST /api/spotify/logout/ HTTP/1.1" 404 8922
+Not Found: /api/spotify/logout/
+"POST /api/spotify/logout/ HTTP/1.1" 404 8922
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 425
+"GET /api/mood/history/ HTTP/1.1" 200 303
+"GET /api/spotify/playlists/ HTTP/1.1" 200 314
+"GET / HTTP/1.1" 200 8167
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3192
+"GET /profile/ HTTP/1.1" 200 12733
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 425
+"GET /api/mood/history/ HTTP/1.1" 200 303
+"GET /api/spotify/playlists/ HTTP/1.1" 200 314
+"GET / HTTP/1.1" 200 8167
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /api/spotify/logout/
+"POST /api/spotify/logout/ HTTP/1.1" 404 8922
+"GET / HTTP/1.1" 200 8167
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 7166
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 8167
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /about/ HTTP/1.1" 200 5072
+"GET /static/js/main.js HTTP/1.1" 200 417
+"GET / HTTP/1.1" 200 8167
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 8752
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 8752
+"GET /static/css/themes.css HTTP/1.1" 200 8895
+"GET /static/css/components.css HTTP/1.1" 200 12449
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/css/responsive.css HTTP/1.1" 200 5991
+"GET /static/js/theme.js HTTP/1.1" 200 1844
+"GET /static/js/utils.js HTTP/1.1" 200 6411
+"GET /static/js/auth.js HTTP/1.1" 200 8182
+"GET /static/js/authCheck.js HTTP/1.1" 200 2268
+"GET /static/js/camera.js HTTP/1.1" 200 13858
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3081
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"POST /api/mood/detect/ HTTP/1.1" 200 45
+Internal Server Error: /api/mood/detect/
+"POST /api/mood/detect/ HTTP/1.1" 500 33
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"POST /api/mood/detect/ HTTP/1.1" 200 48
+"GET /login/ HTTP/1.1" 200 10135
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/css/auth.css HTTP/1.1" 200 9558
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 8752
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /about/ HTTP/1.1" 200 5072
+"GET /static/js/main.js HTTP/1.1" 200 417
+"GET / HTTP/1.1" 200 8752
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /about/ HTTP/1.1" 200 5072
+"GET /login/ HTTP/1.1" 200 10135
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET / HTTP/1.1" 200 8752
+"GET /api/spotify/status/ HTTP/1.1" 200 19

@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - VibeWise</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="VibeWise">
+                <h1>VibeWise</h1>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link active">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <span id="userNameDisplay" style="margin-right: 1rem; color: var(--primary-color); font-weight: 500;"></span>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Not Logged In View -->
+        <div id="notLoggedIn" style="display: none; text-align: center; padding: 4rem 2rem;">
+            <h2>Please Login to View Profile</h2>
+            <p style="margin: 2rem 0;">Connect with Spotify to use VibeWise</p>
+            <a href="{% url 'login' %}" class="btn-primary" style="display: inline-block; text-decoration: none;">
+                Go to Login
+            </a>
+        </div>
+
+        <!-- Logged In View -->
+        <div id="loggedInContent" style="display: none;">
+            <!-- Profile Header -->
+            <section class="profile-header">
+                <div class="container">
+                    <div class="profile-avatar">
+                        <img id="profileImage" src="{% static 'assets/images/logo.png' %}" alt="Profile" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary-color);">
+                    </div>
+                    <div class="profile-info" style="flex: 1;">
+                        <h2 id="profileName">Loading...</h2>
+                        <p id="profileEmail" style="color: var(--text-secondary);"></p>
+                        <p id="spotifyStatus" style="color: var(--primary-color); font-weight: 500;"></p>
+                        
+                        <div class="profile-stats" style="display: flex; gap: 2rem; margin-top: 1.5rem;">
+                            <div class="stat">
+                                <span class="stat-number" id="totalDetections">0</span>
+                                <span class="stat-label">Mood Detections</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="totalPlaylists">0</span>
+                                <span class="stat-label">Playlists Created</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="favoriteGenre">---</span>
+                                <span class="stat-label">Top Genre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Spotify Connection Status -->
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <div id="spotifyCard" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow);">
+                        <h3 style="margin-bottom: 1rem;">🎵 Spotify Connection</h3>
+                        <div id="spotifyInfo">
+                            <p style="color: var(--text-secondary);">Loading Spotify information...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Moods -->
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <h3 style="margin-bottom: 1.5rem;">Recent Mood Detections</h3>
+                    <div id="recentMoods" style="display: grid; gap: 1rem;">
+                        <p style="color: var(--text-secondary);">Loading recent moods...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Playlists -->
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <h3 style="margin-bottom: 1.5rem;">Your VibeWise Playlists</h3>
+                    <div id="userPlaylists" class="playlist-grid">
+                        <p style="color: var(--text-secondary);">Loading playlists...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    
+    <script>
+        async function loadProfile() {
+            console.log('Loading profile...');
+            
+            try {
+                // Check Spotify connection status
+                const statusResponse = await fetch('/api/spotify/status/', {
+                    credentials: 'same-origin'
+                });
+                const statusData = await statusResponse.json();
+                
+                console.log('Spotify status:', statusData);
+                
+                if (!statusData.connected) {
+                    // Not connected, show login prompt
+                    document.getElementById('notLoggedIn').style.display = 'block';
+                    document.getElementById('loggedInContent').style.display = 'none';
+                    return;
+                }
+                
+                // Show logged in content
+                document.getElementById('notLoggedIn').style.display = 'none';
+                document.getElementById('loggedInContent').style.display = 'block';
+                
+                // Load user profile if authenticated
+                if (statusData.user) {
+                    document.getElementById('profileName').textContent = statusData.user.name || 'User';
+                    document.getElementById('profileEmail').textContent = statusData.user.email || '';
+                    document.getElementById('userNameDisplay').textContent = `Hi, ${statusData.user.name || 'User'}!`;
+                    document.getElementById('spotifyStatus').textContent = '✓ Connected to Spotify';
+                    
+                    // Load detailed stats
+                    await loadUserStats();
+                    await loadRecentMoods();
+                    await loadPlaylists();
+                }
+                
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                document.getElementById('notLoggedIn').style.display = 'block';
+                document.getElementById('loggedInContent').style.display = 'none';
+            }
+        }
+        
+        async function loadUserStats() {
+            try {
+                const response = await fetch('/api/dashboard/stats/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    document.getElementById('totalDetections').textContent = data.total_detections || 0;
+                    document.getElementById('totalPlaylists').textContent = data.playlist_count || 0;
+                    
+                    // Get top genre from mood stats
+                    if (data.mood_stats && data.mood_stats.length > 0) {
+                        const topMood = data.mood_stats[0].mood;
+                        document.getElementById('favoriteGenre').textContent = topMood;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
+        async function loadRecentMoods() {
+            try {
+                const response = await fetch('/api/mood/history/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const container = document.getElementById('recentMoods');
+                    
+                    if (data.results && data.results.length > 0) {
+                        container.innerHTML = data.results.map(mood => `
+                            <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="font-size: 1.5rem; margin-right: 0.5rem;">${getMoodEmoji(mood.mood)}</span>
+                                    <strong>${mood.mood.charAt(0).toUpperCase() + mood.mood.slice(1)}</strong>
+                                    <span style="color: var(--text-secondary); margin-left: 1rem;">
+                                        ${(mood.confidence * 100).toFixed(0)}% confident
+                                    </span>
+                                </div>
+                                <span style="color: var(--text-secondary); font-size: 0.9rem;">
+                                    ${new Date(mood.detected_at).toLocaleDateString()}
+                                </span>
+                            </div>
+                        `).join('');
+                    } else {
+                        container.innerHTML = '<p style="color: var(--text-secondary);">No mood detections yet. Start using VibeWise!</p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading moods:', error);
+            }
+        }
+        
+        async function loadPlaylists() {
+            try {
+                const response = await fetch('/api/spotify/playlists/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const container = document.getElementById('userPlaylists');
+                    
+                    if (data.playlists && data.playlists.length > 0) {
+                        container.innerHTML = data.playlists.map(playlist => `
+                            <div class="playlist-card" style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;">
+                                <h4 style="margin-bottom: 0.5rem;">${playlist.name}</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                                    ${playlist.total_tracks} tracks
+                                </p>
+                                <a href="https://open.spotify.com/playlist/${playlist.spotify_id}" target="_blank" class="btn-secondary" style="display: inline-block; text-decoration: none; font-size: 0.9rem; padding: 0.5rem 1rem;">
+                                    Open in Spotify
+                                </a>
+                            </div>
+                        `).join('');
+                    } else {
+                        container.innerHTML = '<p style="color: var(--text-secondary);">No playlists created yet.</p>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading playlists:', error);
+            }
+        }
+        
+        function getMoodEmoji(mood) {
+            const emojis = {
+                'happy': '😊',
+                'sad': '😢',
+                'angry': '😠',
+                'neutral': '😐',
+                'surprise': '😲',
+                'fear': '😨',
+                'disgust': '🤢'
+            };
+            return emojis[mood] || '😐';
+        }
+        
+        // Load profile on page load
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>

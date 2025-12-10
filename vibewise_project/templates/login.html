@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - VibeWise</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <style>
+        /* Enhanced Mobile Responsive for Login */
+        .auth-tabs {
+            display: flex;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tab-button.active {
+            color: white;
+        }
+        
+        .tab-slider {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: calc(50% - 6px);
+            height: calc(100% - 12px);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        
+        .tab-slider.register {
+            transform: translateX(100%);
+        }
+        
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .tab-button {
+                padding: 10px 16px;
+                font-size: 0.95rem;
+            }
+            
+            .auth-tabs {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'includes/header.html' %}
+
+    <main class="main">
+        <section class="auth-section">
+            <div class="container">
+                <!-- Check if already logged in -->
+                <div id="alreadyLoggedIn" style="display: none; text-align: center; padding: 3rem;">
+                    <h2 style="margin-bottom: 1rem;">You're Already Logged In!</h2>
+                    <p id="loggedInUserName" style="color: var(--primary-color); font-size: 1.2rem; margin-bottom: 2rem;"></p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="/" class="btn-primary" style="text-decoration: none;">Go to Home</a>
+                        <a href="/profile/" class="btn-secondary" style="text-decoration: none;">View Profile</a>
+                        <button onclick="logoutAndStay()" class="btn-logout">Switch Account</button>
+                    </div>
+                </div>
+
+                <!-- Login form for not logged in users -->
+                <div class="auth-container" id="loginContainer">
+                    <div class="auth-tabs">
+                        <button class="tab-button active" data-tab="login">Login</button>
+                        <button class="tab-button" data-tab="register">Register</button>
+                        <div class="tab-slider"></div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div id="loginForm" class="auth-form active">
+                        <h2>Welcome Back</h2>
+                        <p>Connect with Spotify to access your personalized music experience</p>
+                        
+                        <button class="btn-spotify" onclick="loginWithSpotify()">
+                            🎵 Continue with Spotify
+                        </button>
+                        
+                        <div class="auth-divider">
+                            <span>Secure authentication via Spotify</span>
+                        </div>
+                        
+                        <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                            By continuing, you agree to let VibeWise access your Spotify account
+                        </p>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div id="registerForm" class="auth-form">
+                        <h2>Create Account</h2>
+                        <p>Join VibeWise and discover music that matches your mood</p>
+                        
+                        <button class="btn-spotify" onclick="loginWithSpotify()">
+                            🎵 Sign up with Spotify
+                        </button>
+                        
+                        <div class="auth-divider">
+                            <span>One-click registration</span>
+                        </div>
+                        
+                        <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                            Create your account instantly using your Spotify profile
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    
+    <script>
+        // Check if user is already logged in
+        async function checkLoginStatus() {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            if (window.authManager && window.authManager.isLoggedIn) {
+                // User is already logged in
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('alreadyLoggedIn').style.display = 'block';
+                document.getElementById('loggedInUserName').textContent = 
+                    `Logged in as ${window.authManager.userData.name}`;
+            } else {
+                document.getElementById('loginContainer').style.display = 'block';
+                document.getElementById('alreadyLoggedIn').style.display = 'none';
+            }
+        }
+        
+        // Logout and stay on login page to switch accounts
+        async function logoutAndStay() {
+            if (confirm('Logout to switch Spotify accounts?')) {
+                try {
+                    const response = await fetch('/api/spotify/logout/', {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'X-CSRFToken': window.authManager.getCsrfToken()
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Don't redirect, just reload the page
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Failed to logout');
+                }
+            }
+        }
+        
+        // Tab switching
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginStatus();
+            
+            const tabs = document.querySelectorAll('.tab-button');
+            const slider = document.querySelector('.tab-slider');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.getAttribute('data-tab');
+                    
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update slider
+                    if (targetTab === 'register') {
+                        slider.classList.add('register');
+                    } else {
+                        slider.classList.remove('register');
+                    }
+                    
+                    // Update forms
+                    forms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === targetTab + 'Form') {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
