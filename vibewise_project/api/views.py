@@ -78,10 +78,47 @@ class AuthViewSet(viewsets.ViewSet):
                 'message': 'Registration failed'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post', 'get'])
     def logout(self, request):
-        logout(request)
-        return Response({'message': 'Logout successful'})
+        """Fixed logout - clears session and tokens"""
+        try:
+            if request.user.is_authenticated:
+                request.user.spotify_access_token = None
+                request.user.spotify_refresh_token = None
+                request.user.spotify_id = None
+                request.user.save()
+            
+            if hasattr(request, 'session'):
+                request.session.flush()
+            
+            logout(request)
+            
+            return Response({
+                'success': True,
+                'message': 'Logout successful'
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            print(f"Logout error: {e}")
+            return Response({
+                'success': False,
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['get'])
+    def check_auth(self, request):
+        """Check if user is authenticated"""
+        is_authenticated = request.user.is_authenticated
+        
+        if is_authenticated:
+            return Response({
+                'authenticated': True,
+                'user': UserSerializer(request.user).data
+            })
+        else:
+            return Response({
+                'authenticated': False
+            })
     
     @action(detail=False, methods=['post'])
     def forgot_password(self, request):
@@ -95,13 +132,25 @@ class AuthViewSet(viewsets.ViewSet):
             'message': 'Password reset link sent to your email'
         })
 
+
 class MoodDetectionViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]  # Changed to allow anyone
+    """⚠️ PRIVACY-FOCUSED: Requires authentication, DOES NOT SAVE IMAGES"""
+    permission_classes = [IsAuthenticated]
     
     @action(detail=False, methods=['post'])
     def detect(self, request):
+        """Detect mood from image - PRIVACY PROTECTED (NO IMAGE STORAGE)"""
         try:
+            # Double-check authentication
+            if not request.user.is_authenticated:
+                return Response({
+                    'error': 'Authentication required. Please login to use mood detection.',
+                    'authenticated': False
+                }, status=status.HTTP_401_UNAUTHORIZED)
+            
             image_data = request.data.get('image')
+            save_image = request.data.get('save_image', False)  # Default: DON'T save
+            
             if not image_data:
                 return Response({
                     'error': 'No image provided'
@@ -120,44 +169,40 @@ class MoodDetectionViewSet(viewsets.ViewSet):
             mood_result = mood_service.detect_mood_from_base64(imgstr)
             
             if mood_result:
-                # Save result to database only if user is authenticated
-                if request.user.is_authenticated:
-                    mood_detection = MoodDetectionResult.objects.create(
-                        user=request.user,
-                        mood=mood_result['mood'],
-                        confidence=mood_result['confidence'],
-                        image=ContentFile(
-                            base64.b64decode(imgstr), 
-                            name=f"mood_{datetime.now().strftime('%Y%m%d_%H%M%S')}.{ext}"
-                        )
-                    )
-                    result_id = mood_detection.id
-                else:
-                    result_id = None
+                # ⚠️ PRIVACY: Save ONLY mood result, NOT the image
+                mood_detection = MoodDetectionResult.objects.create(
+                    user=request.user,
+                    mood=mood_result['mood'],
+                    confidence=mood_result['confidence']
+                    # image field is LEFT EMPTY for privacy
+                )
+                
+                print(f"✅ Mood detected for {request.user.email}: {mood_result['mood']} "
+                      f"(image NOT saved for privacy)")
                 
                 return Response({
                     'mood': mood_result['mood'],
                     'confidence': mood_result['confidence'],
-                    'id': result_id
+                    'id': mood_detection.id,
+                    'message': 'Mood detected successfully',
+                    'privacy': 'Image processed but not saved'
                 })
             else:
                 return Response({
-                    'error': 'Failed to detect mood'
+                    'error': 'Failed to detect mood from image'
                 }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
         except Exception as e:
             print(f"Mood detection error: {e}")
+            import traceback
+            traceback.print_exc()
             return Response({
                 'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     @action(detail=False, methods=['get'])
     def history(self, request):
-        if not request.user.is_authenticated:
-            return Response({
-                'error': 'Authentication required'
-            }, status=status.HTTP_401_UNAUTHORIZED)
-        
+        """Get mood detection history (without images for privacy)"""
         moods = MoodDetectionResult.objects.filter(
             user=request.user
         ).order_by('-detected_at')[:20]
@@ -166,15 +211,17 @@ class MoodDetectionViewSet(viewsets.ViewSet):
             'results': MoodDetectionSerializer(moods, many=True).data
         })
 
+
 class SpotifyViewSet(viewsets.ViewSet):
-    permission_classes = [AllowAny]  # Allow anyone to connect
+    permission_classes = [AllowAny]
     
     @action(detail=False, methods=['post'])
     def connect(self, request):
+        """Connect Spotify account"""
         code = request.data.get('code')
         redirect_uri = request.data.get('redirect_uri', settings.SPOTIFY_REDIRECT_URI)
         
-        print(f"Spotify connect called with code: {code[:20] if code else 'None'}...")
+        print(f"Spotify connect - Code: {code[:20] if code else 'None'}...")
         print(f"Redirect URI: {redirect_uri}")
         
         if not code:
@@ -186,22 +233,16 @@ class SpotifyViewSet(viewsets.ViewSet):
             spotify_service = SpotifyService()
             tokens = spotify_service.exchange_code_for_tokens(code, redirect_uri)
             
-            print(f"Tokens received: access_token={bool(tokens.get('access_token'))}")
-            
-            # Get Spotify user profile
             spotify_user = spotify_service.get_user_profile(tokens['access_token'])
             print(f"Spotify user: {spotify_user.get('id')}, {spotify_user.get('display_name')}")
             
-            # Create or get Django user
             email = spotify_user.get('email')
             spotify_id = spotify_user.get('id')
             display_name = spotify_user.get('display_name', 'Spotify User')
             
             if not email:
-                # If no email, use spotify_id as email
                 email = f"{spotify_id}@spotify.user"
             
-            # Try to get existing user or create new one
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
@@ -214,31 +255,23 @@ class SpotifyViewSet(viewsets.ViewSet):
             )
             
             if not created:
-                # Update existing user
                 user.name = display_name
                 user.spotify_id = spotify_id
                 user.spotify_access_token = tokens['access_token']
                 user.spotify_refresh_token = tokens.get('refresh_token', '')
                 user.save()
-                print(f"Updated existing user: {user.email}")
             else:
-                # Set password for new user
                 user.set_password(User.objects.make_random_password())
                 user.save()
-                print(f"Created new user: {user.email}")
-                
-                # Create user preferences
                 UserPreferences.objects.get_or_create(user=user)
             
-            # Log the user in
-            from django.contrib.auth import login
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            print(f"User logged in: {user.email}")
             
             return Response({
                 'message': 'Spotify connected successfully',
                 'spotify_user': spotify_user,
                 'user': {
+                    'id': user.id,
                     'name': user.name,
                     'email': user.email,
                     'spotify_id': user.spotify_id
@@ -248,144 +281,117 @@ class SpotifyViewSet(viewsets.ViewSet):
         except Exception as e:
             import traceback
             print(f"Spotify connection error: {e}")
-            print(traceback.format_exc())
+            traceback.print_exc()
             return Response({
                 'error': f'Failed to connect Spotify: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     @action(detail=False, methods=['post'])
     def create_playlist(self, request):
+        """Create personalized Spotify playlist based on mood AND user's listening habits"""
         mood = request.data.get('mood')
         if not mood:
             return Response({
                 'error': 'Mood is required'
             }, status=status.HTTP_400_BAD_REQUEST)
         
-        # Get access token from user or session
-        if request.user.is_authenticated and request.user.spotify_access_token:
-            access_token = request.user.spotify_access_token
-            spotify_id = request.user.spotify_id
-        elif request.session.get('spotify_access_token'):
-            access_token = request.session.get('spotify_access_token')
-            spotify_id = request.session.get('spotify_user_id')
-        else:
+        if not request.user.is_authenticated:
             return Response({
-                'error': 'Spotify not connected'
+                'error': 'Please login with Spotify to create playlists'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+        
+        if not request.user.spotify_access_token:
+            return Response({
+                'error': 'Spotify not connected. Please connect your Spotify account.'
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+        access_token = request.user.spotify_access_token
+        spotify_id = request.user.spotify_id
         
         try:
             spotify_service = SpotifyService()
             
-            # Get user's top genres for personalization
+            # ✅ GET USER'S ACTUAL LISTENING HABITS
+            print(f"🎵 Fetching listening habits for {request.user.email}...")
             user_genres = spotify_service.get_user_top_genres(access_token)
+            print(f"User's top genres: {user_genres}")
             
-            # Create personalized playlist
+            # Create personalized playlist based on BOTH mood and user preferences
             playlist = spotify_service.create_personalized_mood_playlist(
                 access_token,
                 spotify_id,
                 mood,
-                user_genres
+                user_genres  # ✅ Uses actual user listening history
             )
             
-            # Save playlist to database if user is authenticated
-            if request.user.is_authenticated:
-                db_playlist = SpotifyPlaylist.objects.create(
-                    user=request.user,
-                    spotify_id=playlist['id'],
-                    name=playlist['name'],
-                    description=playlist.get('description', ''),
-                    image_url=playlist.get('images', [{}])[0].get('url') if playlist.get('images') else None,
-                    total_tracks=playlist.get('tracks', {}).get('total', 0),
-                    is_public=playlist.get('public', True)
-                )
-                playlist_data = SpotifyPlaylistSerializer(db_playlist).data
-            else:
-                playlist_data = {
-                    'spotify_id': playlist['id'],
-                    'name': playlist['name'],
-                    'description': playlist.get('description', ''),
-                }
+            # Save to database
+            db_playlist = SpotifyPlaylist.objects.create(
+                user=request.user,
+                spotify_id=playlist['id'],
+                name=playlist['name'],
+                description=playlist.get('description', ''),
+                image_url=playlist.get('images', [{}])[0].get('url') if playlist.get('images') else None,
+                total_tracks=playlist.get('tracks', {}).get('total', 0),
+                is_public=playlist.get('public', True)
+            )
             
             return Response({
-                'playlist': playlist_data,
+                'playlist': SpotifyPlaylistSerializer(db_playlist).data,
                 'spotify_url': playlist['external_urls']['spotify'],
                 'genres_used': user_genres[:3],
-                'message': f'Created personalized {mood} playlist with your favorite genres!'
+                'message': f'Created personalized {mood} playlist with your favorite genres: {", ".join(user_genres[:3])}!'
             })
             
         except Exception as e:
             print(f"Playlist creation error: {e}")
+            import traceback
+            traceback.print_exc()
             return Response({
                 'error': f'Failed to create playlist: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     @action(detail=False, methods=['get'])
     def playlists(self, request):
+        """Get user's playlists"""
         if not request.user.is_authenticated:
             return Response({
                 'error': 'Authentication required'
             }, status=status.HTTP_401_UNAUTHORIZED)
         
-        playlists = SpotifyPlaylist.objects.filter(user=request.user)
+        playlists = SpotifyPlaylist.objects.filter(user=request.user).order_by('-created_at')
         return Response({
             'playlists': SpotifyPlaylistSerializer(playlists, many=True).data
         })
 
     @action(detail=False, methods=['get'])
     def status(self, request):
-        """Check if user has Spotify connected"""
-        print(f"Status check - User authenticated: {request.user.is_authenticated}")
-        
-        if request.user.is_authenticated:
-            print(f"User: {request.user.email}, Has token: {bool(request.user.spotify_access_token)}")
-            
-            if request.user.spotify_access_token:
-                return Response({
-                    'connected': True,
-                    'user': {
-                        'name': request.user.name or request.user.username,
-                        'email': request.user.email,
-                        'spotify_id': request.user.spotify_id
-                    }
-                })
-            else:
-                return Response({'connected': False})
+        """Check Spotify connection status"""
+        if request.user.is_authenticated and request.user.spotify_access_token:
+            return Response({
+                'connected': True,
+                'user': {
+                    'name': request.user.name or request.user.username,
+                    'email': request.user.email,
+                    'spotify_id': request.user.spotify_id
+                }
+            })
         else:
-            # Check session
-            if request.session.get('spotify_access_token'):
-                print("Found Spotify token in session")
-                return Response({
-                    'connected': True,
-                    'session': True
-                })
-            else:
-                print("No user and no session token")
-                return Response({'connected': False})
+            return Response({'connected': False})
     
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post', 'get'])
     def logout(self, request):
-        """Logout user and clear Spotify tokens"""
-        print(f"Logout requested for user: {request.user}")
-        
+        """Logout and clear Spotify tokens"""
         try:
-            # Clear user tokens if authenticated
             if request.user.is_authenticated:
-                print(f"Clearing tokens for user: {request.user.email}")
                 request.user.spotify_access_token = None
                 request.user.spotify_refresh_token = None
                 request.user.spotify_id = None
                 request.user.save()
-                print("✓ User tokens cleared")
             
-            # Clear ALL session data
             if hasattr(request, 'session'):
                 request.session.flush()
-                print("✓ Session flushed")
             
-            # Django logout
-            from django.contrib.auth import logout as django_logout
-            django_logout(request)
-            print("✓ Django logout complete")
+            logout(request)
             
             return Response({
                 'success': True,
@@ -394,12 +400,13 @@ class SpotifyViewSet(viewsets.ViewSet):
             
         except Exception as e:
             import traceback
-            print(f"❌ Logout error: {e}")
-            print(traceback.format_exc())
+            print(f"Logout error: {e}")
+            traceback.print_exc()
             return Response({
                 'success': False,
                 'error': str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
@@ -426,6 +433,7 @@ class UserProfileView(APIView):
             'message': 'Profile updated successfully',
             'user': UserSerializer(user).data
         })
+
 
 class DashboardStatsView(APIView):
     permission_classes = [IsAuthenticated]

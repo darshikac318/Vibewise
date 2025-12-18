@@ -1,44 +1,52 @@
-// Simplified Camera Manager for Mood Detection
-console.log('Camera.js loaded');
+// FIXED Camera Manager - Single popup, no image storage
+console.log('Camera.js loaded - Privacy-focused version');
 
 let video = null;
 let canvas = null;
 let stream = null;
+let authCheckInProgress = false; // Prevent duplicate checks
 
 // Initialize camera on page load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing camera manager');
     
-    // Get video and canvas elements
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     
-    if (!video) {
-        console.error('Video element not found!');
-    }
-    
-    if (!canvas) {
-        console.error('Canvas element not found!');
-    }
+    if (!video) console.error('Video element not found!');
+    if (!canvas) console.error('Canvas element not found!');
     
     // Setup start detection button
     const startBtn = document.getElementById('startDetectionBtn');
     if (startBtn) {
         console.log('Start detection button found');
-        startBtn.addEventListener('click', function() {
+        startBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling
             console.log('Start detection clicked');
+            
+            // ⚠️ SINGLE AUTH CHECK - No double popup
+            if (!await checkAuthenticationOnce()) {
+                return; // STOP if not authenticated
+            }
+            
             showCameraSection();
             startCamera();
         });
-    } else {
-        console.error('Start detection button not found!');
     }
     
     // Setup detect mood button
     const detectBtn = document.getElementById('detectButton');
     if (detectBtn) {
-        detectBtn.addEventListener('click', function() {
+        detectBtn.addEventListener('click', async function() {
             console.log('Detect mood clicked');
+            
+            // Quick check without popup
+            if (!await quickAuthCheck()) {
+                stopCamera();
+                return;
+            }
+            
             detectMood();
         });
     }
@@ -53,6 +61,88 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+/**
+ * ⚠️ SINGLE AUTH CHECK - Prevents double popup
+ */
+async function checkAuthenticationOnce() {
+    // Prevent multiple simultaneous checks
+    if (authCheckInProgress) {
+        console.log('Auth check already in progress, waiting...');
+        return false;
+    }
+    
+    authCheckInProgress = true;
+    console.log('🔒 Checking authentication (single check)...');
+    
+    try {
+        if (!window.authManager) {
+            console.error('❌ Auth manager not available!');
+            showMessage('Please refresh the page and try again.', 'error');
+            authCheckInProgress = false;
+            return false;
+        }
+        
+        // Check authentication status
+        console.log('Checking authentication status from server...');
+        const isAuthenticated = await window.authManager.checkAuthStatus();
+        
+        if (!isAuthenticated) {
+            console.log('❌ USER NOT AUTHENTICATED');
+            
+            // Single login prompt
+            const message = '🎵 Spotify Login Required\n\n' +
+                          'You need to connect with Spotify to use VibeWise mood detection.\n\n' +
+                          'Click OK to login now.';
+            
+            if (confirm(message)) {
+                sessionStorage.setItem('autoStartCamera', 'true');
+                sessionStorage.setItem('returnTo', window.location.pathname);
+                window.location.href = '/login/';
+            }
+            
+            authCheckInProgress = false;
+            return false;
+        }
+        
+        console.log('✅ USER AUTHENTICATED');
+        authCheckInProgress = false;
+        return true;
+        
+    } catch (error) {
+        console.error('❌ Authentication check error:', error);
+        showMessage('Failed to verify authentication.', 'error');
+        authCheckInProgress = false;
+        return false;
+    }
+}
+
+/**
+ * Quick auth check without popup (for subsequent actions)
+ */
+async function quickAuthCheck() {
+    try {
+        if (!window.authManager) return false;
+        
+        const response = await fetch('/api/spotify/status/', {
+            credentials: 'same-origin',
+            cache: 'no-cache'
+        });
+        
+        const data = await response.json();
+        
+        if (!data.connected) {
+            showMessage('Session expired. Please login again.', 'error');
+            setTimeout(() => window.location.href = '/login/', 1500);
+            return false;
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Quick auth check error:', error);
+        return false;
+    }
+}
+
 function showCameraSection() {
     console.log('Showing camera section');
     const cameraSection = document.getElementById('cameraSection');
@@ -66,7 +156,6 @@ async function startCamera() {
     console.log('Starting camera...');
     
     try {
-        // Request camera access
         stream = await navigator.mediaDevices.getUserMedia({
             video: {
                 width: { ideal: 640 },
@@ -76,20 +165,18 @@ async function startCamera() {
             audio: false
         });
         
-        console.log('Camera access granted');
+        console.log('✅ Camera access granted');
         
         if (video) {
             video.srcObject = stream;
             await video.play();
             console.log('Video playing');
             
-            // Show video container
             const videoContainer = document.getElementById('videoContainer');
             if (videoContainer) {
                 videoContainer.style.display = 'block';
             }
             
-            // Show stop button
             const stopBtn = document.getElementById('stopCamera');
             if (stopBtn) {
                 stopBtn.style.display = 'inline-block';
@@ -129,13 +216,11 @@ function stopCamera() {
         video.srcObject = null;
     }
     
-    // Hide video container
     const videoContainer = document.getElementById('videoContainer');
     if (videoContainer) {
         videoContainer.style.display = 'none';
     }
     
-    // Hide stop button
     const stopBtn = document.getElementById('stopCamera');
     if (stopBtn) {
         stopBtn.style.display = 'none';
@@ -152,17 +237,15 @@ function captureFrame() {
         return null;
     }
     
-    // Set canvas size to match video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     
-    // Draw video frame to canvas
     const context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
-    // Convert to base64
+    // Convert to base64 (temporary, not saved)
     const imageData = canvas.toDataURL('image/jpeg', 0.8);
-    console.log('Frame captured, data length:', imageData.length);
+    console.log('✅ Frame captured (NOT saved, privacy-protected)');
     
     return imageData;
 }
@@ -171,21 +254,25 @@ async function detectMood() {
     console.log('Detecting mood...');
     
     try {
-        // Capture frame from video
+        // Quick auth check
+        if (!await quickAuthCheck()) {
+            stopCamera();
+            throw new Error('Session expired. Please login again.');
+        }
+        
+        // Capture frame (not saved to storage)
         const imageData = captureFrame();
         
         if (!imageData) {
             throw new Error('Failed to capture image');
         }
         
-        // Show loading
         showLoading(true);
         
-        // Get CSRF token
         const csrfToken = getCsrfToken();
-        console.log('CSRF token:', csrfToken);
+        console.log('CSRF token:', csrfToken ? 'Present' : 'Missing');
         
-        // Send to backend
+        // Send to backend (backend will NOT save image)
         console.log('Sending request to /api/mood/detect/');
         const response = await fetch('/api/mood/detect/', {
             method: 'POST',
@@ -195,22 +282,27 @@ async function detectMood() {
             },
             credentials: 'same-origin',
             body: JSON.stringify({
-                image: imageData
+                image: imageData,
+                save_image: false // ⚠️ IMPORTANT: Don't save image
             })
         });
         
         console.log('Response status:', response.status);
+        
+        if (response.status === 401) {
+            stopCamera();
+            throw new Error('Session expired. Please login again.');
+        }
+        
         const data = await response.json();
         console.log('Response data:', data);
         
         if (response.ok) {
             displayMoodResult(data);
             
-            // Auto-stop camera after successful detection
             console.log('Detection complete, stopping camera...');
             showMessage('Mood detected! Camera stopped.', 'success');
             
-            // Wait a moment before stopping camera
             setTimeout(() => {
                 stopCamera();
             }, 1000);
@@ -222,6 +314,12 @@ async function detectMood() {
     } catch (error) {
         console.error('Detection error:', error);
         showMessage('Error: ' + error.message, 'error');
+        
+        if (error.message.includes('login') || error.message.includes('Session expired')) {
+            setTimeout(() => {
+                window.location.href = '/login/';
+            }, 2000);
+        }
     } finally {
         showLoading(false);
     }
@@ -231,25 +329,13 @@ function displayMoodResult(result) {
     console.log('Displaying mood result:', result);
     
     const moodEmojis = {
-        'happy': '😊',
-        'sad': '😢',
-        'angry': '😠',
-        'neutral': '😐',
-        'surprised': '😲',
-        'fear': '😨',
-        'disgust': '🤢',
-        'excited': '🤩',
-        'confident': '😎',
-        'motivated': '💪',
-        'dancing': '💃',
-        'romantic': '😍',
-        'peaceful': '😌',
-        'energetic': '⚡',
-        'melancholic': '🥺',
-        'playful': '😜'
+        'happy': '😊', 'sad': '😢', 'angry': '😠', 'neutral': '😐',
+        'surprised': '😲', 'fear': '😨', 'disgust': '🤢', 'excited': '🤩',
+        'confident': '😎', 'motivated': '💪', 'dancing': '💃', 'romantic': '😍',
+        'peaceful': '😌', 'energetic': '⚡', 'melancholic': '🥺', 'playful': '😜'
     };
     
-    const emoji = moodEmojis[result.mood] || '😐';
+    const emoji = moodEmojis[result.mood] || '😊';
     const confidence = (result.confidence * 100).toFixed(1);
     
     const resultContainer = document.getElementById('moodResult');
@@ -266,6 +352,9 @@ function displayMoodResult(result) {
                 <div style="background: var(--bg-tertiary); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1.5rem;">
                     <div style="background: var(--primary-color); height: 100%; width: ${confidence}%; transition: width 0.3s;"></div>
                 </div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                    🔒 Your image was processed privately and not saved
+                </p>
                 <button onclick="createPlaylistForMood('${result.mood}')" class="btn-primary">
                     🎵 Create Personalized Playlist
                 </button>
@@ -281,10 +370,8 @@ function createPlaylistForMood(mood) {
     showLoading(true);
     showMessage('Creating your personalized playlist...', 'info');
     
-    // Get CSRF token
     const csrfToken = getCsrfToken();
     
-    // Call API to create playlist
     fetch('/api/spotify/create_playlist/', {
         method: 'POST',
         headers: {
@@ -294,14 +381,18 @@ function createPlaylistForMood(mood) {
         credentials: 'same-origin',
         body: JSON.stringify({ mood: mood })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.status === 401) {
+            throw new Error('Session expired. Please login again.');
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Playlist created:', data);
         
         if (data.playlist) {
-            showMessage(`✓ Playlist created successfully!`, 'success');
+            showMessage(`✅ Playlist created successfully!`, 'success');
             
-            // Update result display with playlist info
             const moodResult = document.getElementById('moodResult');
             if (moodResult) {
                 const genresText = data.genres_used ? data.genres_used.join(', ') : 'your favorites';
@@ -327,6 +418,12 @@ function createPlaylistForMood(mood) {
     .catch(error => {
         console.error('Playlist creation error:', error);
         showMessage('Failed to create playlist: ' + error.message, 'error');
+        
+        if (error.message.includes('login') || error.message.includes('Session expired')) {
+            setTimeout(() => {
+                window.location.href = '/login/';
+            }, 2000);
+        }
     })
     .finally(() => {
         showLoading(false);
@@ -350,7 +447,6 @@ function showLoading(isLoading) {
 function showMessage(message, type = 'info') {
     console.log(type.toUpperCase() + ':', message);
     
-    // Create notification element
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
@@ -364,6 +460,7 @@ function showMessage(message, type = 'info') {
         font-weight: 500;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         animation: slideIn 0.3s ease;
+        max-width: 350px;
     `;
     notification.textContent = message;
     
@@ -372,28 +469,27 @@ function showMessage(message, type = 'info') {
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => {
-            document.body.removeChild(notification);
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
         }, 300);
     }, 4000);
 }
 
 function getCsrfToken() {
-    // Try to get from cookie
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {
         const [name, value] = cookie.trim().split('=');
         if (name === 'csrftoken') {
-            return value;
+            return decodeURIComponent(value);
         }
     }
     
-    // Try to get from hidden input
     const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
     if (csrfInput) {
         return csrfInput.value;
     }
     
-    // Try to get from meta tag
     const csrfMeta = document.querySelector('meta[name="csrf-token"]');
     if (csrfMeta) {
         return csrfMeta.content;
@@ -407,27 +503,14 @@ function getCsrfToken() {
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
-    
     @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
     }
 `;
 document.head.appendChild(style);
 
-console.log('Camera manager ready');
+console.log('✅ Camera manager ready (privacy-protected, single popup)');

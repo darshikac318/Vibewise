@@ -5,34 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - VibeWise</title>
+    
+    <!-- Theme Pre-loader -->
+    <script>
+    (function() {
+        'use strict';
+        const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (document.body) {
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+        console.log(`⚡ Profile: Theme pre-loaded: ${savedTheme}`);
+    })();
+    </script>
+    
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
     <link rel="stylesheet" href="{% static 'css/themes.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 <body>
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="{% static 'assets/images/logo.png' %}" alt="VibeWise">
-                <h1>VibeWise</h1>
-            </div>
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-                    <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link active">Profile</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <span id="userNameDisplay" style="margin-right: 1rem; color: var(--primary-color); font-weight: 500;"></span>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <span class="theme-icon">🌙</span>
-                </button>
-            </div>
-        </div>
-    </header>
+    {% include 'includes/header.html' %}
 
     <main class="main">
         <!-- Not Logged In View -->
@@ -70,6 +63,13 @@
                                 <span class="stat-number" id="favoriteGenre">---</span>
                                 <span class="stat-label">Top Genre</span>
                             </div>
+                        </div>
+                        
+                        <!-- Logout Button in Profile -->
+                        <div style="margin-top: 1.5rem;">
+                            <button id="profileLogoutBtn" class="btn-logout" style="display: inline-block;">
+                                Logout from Spotify
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -117,13 +117,13 @@
 
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
     
     <script>
         async function loadProfile() {
             console.log('Loading profile...');
             
             try {
-                // Check Spotify connection status
                 const statusResponse = await fetch('/api/spotify/status/', {
                     credentials: 'same-origin'
                 });
@@ -132,24 +132,19 @@
                 console.log('Spotify status:', statusData);
                 
                 if (!statusData.connected) {
-                    // Not connected, show login prompt
                     document.getElementById('notLoggedIn').style.display = 'block';
                     document.getElementById('loggedInContent').style.display = 'none';
                     return;
                 }
                 
-                // Show logged in content
                 document.getElementById('notLoggedIn').style.display = 'none';
                 document.getElementById('loggedInContent').style.display = 'block';
                 
-                // Load user profile if authenticated
                 if (statusData.user) {
                     document.getElementById('profileName').textContent = statusData.user.name || 'User';
                     document.getElementById('profileEmail').textContent = statusData.user.email || '';
-                    document.getElementById('userNameDisplay').textContent = `Hi, ${statusData.user.name || 'User'}!`;
-                    document.getElementById('spotifyStatus').textContent = '✓ Connected to Spotify';
+                    document.getElementById('spotifyStatus').textContent = '✅ Connected to Spotify';
                     
-                    // Load detailed stats
                     await loadUserStats();
                     await loadRecentMoods();
                     await loadPlaylists();
@@ -174,7 +169,6 @@
                     document.getElementById('totalDetections').textContent = data.total_detections || 0;
                     document.getElementById('totalPlaylists').textContent = data.playlist_count || 0;
                     
-                    // Get top genre from mood stats
                     if (data.mood_stats && data.mood_stats.length > 0) {
                         const topMood = data.mood_stats[0].mood;
                         document.getElementById('favoriteGenre').textContent = topMood;
@@ -252,19 +246,64 @@
         
         function getMoodEmoji(mood) {
             const emojis = {
-                'happy': '😊',
-                'sad': '😢',
-                'angry': '😠',
-                'neutral': '😐',
-                'surprise': '😲',
-                'fear': '😨',
-                'disgust': '🤢'
+                'happy': '😊', 'sad': '😢', 'angry': '😠', 'neutral': '😐',
+                'surprised': '😲', 'fear': '😨', 'disgust': '🤢', 'excited': '🤩',
+                'confident': '😎', 'motivated': '💪', 'dancing': '💃', 'romantic': '😍',
+                'peaceful': '😌', 'energetic': '⚡', 'melancholic': '🥺', 'playful': '😜'
             };
-            return emojis[mood] || '😐';
+            return emojis[mood] || '😊';
         }
         
-        // Load profile on page load
-        document.addEventListener('DOMContentLoaded', loadProfile);
+        // Setup profile logout button
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+            
+            // Profile-specific logout button
+            const profileLogoutBtn = document.getElementById('profileLogoutBtn');
+            if (profileLogoutBtn) {
+                profileLogoutBtn.addEventListener('click', async () => {
+                    console.log('🚪 Profile logout clicked');
+                    
+                    // Use the global auth manager's logout function
+                    if (window.authManager) {
+                        await window.authManager.logout();
+                    } else {
+                        // Fallback if auth manager not loaded yet
+                        if (confirm('Are you sure you want to logout?')) {
+                            try {
+                                const csrfToken = getCsrfToken();
+                                const response = await fetch('/api/spotify/logout/', {
+                                    method: 'POST',
+                                    credentials: 'same-origin',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRFToken': csrfToken
+                                    }
+                                });
+                                
+                                if (response.ok) {
+                                    window.location.href = '/';
+                                }
+                            } catch (error) {
+                                console.error('Logout error:', error);
+                                alert('Failed to logout');
+                            }
+                        }
+                    }
+                });
+            }
+        });
+        
+        function getCsrfToken() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'csrftoken') {
+                    return decodeURIComponent(value);
+                }
+            }
+            return null;
+        }
     </script>
 </body>
 </html>

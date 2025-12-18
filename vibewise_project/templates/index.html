@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
     <link rel="stylesheet" href="{% static 'css/themes.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <script>
+        (function() {
+            'use strict';
+            const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (document.body) {
+                document.body.setAttribute('data-theme', savedTheme);
+            } else {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.setAttribute('data-theme', savedTheme);
+                });
+            }
+            
+            console.log(`✅ Theme pre-loaded: ${savedTheme}`);
+        })();
+    </script>
 </head>
 <body>
     <header class="header">
@@ -116,84 +133,18 @@
     <script src="{% static 'js/camera.js' %}"></script>
     
     <script>
+        // ⚠️ REMOVED DUPLICATE AUTH CHECK - camera.js handles it
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async () => {
             console.log('Homepage loaded');
-            
-            // Wait for auth manager to fully initialize
-            let authReady = false;
-            let attempts = 0;
-            
-            while (!authReady && attempts < 20) {
-                if (window.authManager && window.authManager.checkInProgress === false) {
-                    authReady = true;
-                    console.log('Auth manager is ready');
-                } else {
-                    await new Promise(resolve => setTimeout(resolve, 100));
-                    attempts++;
-                }
-            }
             
             // Check if we should auto-start camera (after login)
             if (window.AuthCheck) {
                 AuthCheck.checkAutoStart();
             }
             
-            // Setup start detection button
-            const startBtn = document.getElementById('startDetectionBtn');
-            if (startBtn) {
-                startBtn.onclick = async function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('=== Start Detection Clicked ===');
-                    
-                    // CRITICAL: Force recheck auth status
-                    if (!window.authManager) {
-                        console.error('Auth manager not available!');
-                        alert('Please refresh the page and try again.');
-                        return false;
-                    }
-                    
-                    console.log('Rechecking auth status...');
-                    const isAuthenticated = await window.authManager.requireAuth();
-                    
-                    // STOP HERE if not authenticated
-                    if (!isAuthenticated) {
-                        console.log('❌ Authentication failed - BLOCKING camera access');
-                        return false; // EXIT - DO NOT PROCEED
-                    }
-                    
-                    // Only reach here if authenticated
-                    console.log('✓ User authenticated, proceeding with camera');
-                    
-                    // Show camera section
-                    const cameraSection = document.getElementById('cameraSection');
-                    if (cameraSection) {
-                        cameraSection.style.display = 'block';
-                        cameraSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    
-                    // Start camera
-                    if (window.startCamera) {
-                        try {
-                            await startCamera();
-                            
-                            const stopBtn = document.getElementById('stopCamera');
-                            if (stopBtn) {
-                                stopBtn.style.display = 'inline-block';
-                            }
-                        } catch (error) {
-                            console.error('Failed to start camera:', error);
-                            alert('Failed to access camera. Please check permissions.');
-                        }
-                    } else {
-                        console.error('startCamera function not found!');
-                        alert('Camera functionality not available. Please refresh the page.');
-                    }
-                    
-                    return false; // Prevent any default action
-                };
-            }
+            // ⚠️ DON'T ADD EXTRA CLICK HANDLER HERE
+            // camera.js already handles the startDetectionBtn click
         });
     </script>
 </body>

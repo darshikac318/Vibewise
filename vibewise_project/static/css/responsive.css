@@ -1,128 +1,664 @@
-/* VibeWise Responsive Styles - Optimized */
+/* FINAL RESPONSIVE CSS - ALL LAYOUTS HORIZONTAL */
 
-/* Mobile First (320px+) */
+/* ============================================
+   FORCE HORIZONTAL LAYOUTS ON ALL DEVICES
+   ============================================ */
+
+/* Base - Ensure horizontal layout */
+.header-container,
+.nav-list,
+.auth-tabs {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+/* ============================================
+   MOBILE FIRST (320px+)
+   ============================================ */
+
 @media (max-width: 767px) {
-    /* Typography & Layout */
-    h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } h3 { font-size: 1.25rem; }
-    .hero h2 { font-size: 2rem; } .hero p { font-size: 1rem; } .hero { padding: 2rem 0; }
-    .container { padding: 0 15px; } .main { padding: 1rem 0; } .footer { padding: 1rem 0; }
+    /* Typography */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.25rem; }
     
-    /* Header & Navigation */
-    .header .container { flex-direction: column; gap: 1rem; }
-    .logo { justify-content: center; }
-    .nav { flex-direction: column; gap: 0.5rem; width: 100%; }
-    .nav-link { text-align: center; padding: 0.75rem; }
+    .hero h2 { font-size: 1.8rem; }
+    .hero p { font-size: 1rem; }
+    .hero { padding: 2rem 0; }
     
-    /* Camera & Controls */
-    .camera-container { margin: 0 10px; }
-    .camera-controls { flex-direction: column; gap: 0.5rem; }
-    .camera-controls .btn-primary, .camera-controls .btn-secondary { width: 100%; }
-    .mood-indicator { top: 10px; left: 10px; right: 10px; text-align: center; }
+    .container { 
+        padding: 0 1rem;
+        max-width: 100%;
+    }
     
-    /* Results & Playlist */
-    .mood-result { padding: 1rem; margin-bottom: 1rem; }
-    .confidence-bar { width: 100%; max-width: 200px; }
-    .playlist-item { flex-direction: column; text-align: center; gap: 0.5rem; }
-    .playlist-item img { width: 80px; height: 80px; }
-    .playlist-actions { flex-direction: column; gap: 0.5rem; }
-    .playlist-actions .btn-primary, .playlist-actions .btn-secondary { width: 100%; }
+    .main { padding: 1rem 0; }
+    .footer { padding: 1.5rem 0; }
     
-    /* About Page */
-    .about-grid, .features-list, .playlist-grid { grid-template-columns: 1fr; }
-    .about-card { padding: 1rem; }
-    .tech-grid { gap: 0.5rem; }
-    .tech-item { font-size: 0.8rem; padding: 0.25rem 0.5rem; }
+    /* ========================================
+       HEADER - HORIZONTAL LAYOUT
+       ======================================== */
     
-    /* Auth & Profile */
-    .auth-container { padding: 1rem; margin: 0 10px; }
-    .auth-tabs, .profile-tabs { flex-direction: column; }
-    .tab-button { border-bottom: 1px solid var(--border-color); }
-    .tab-button.active { border-bottom-color: var(--primary-color); }
-    .profile-header { flex-direction: column; text-align: center; gap: 1rem; padding: 1rem; }
-    .profile-avatar img { width: 80px; height: 80px; }
-    .profile-stats { justify-content: center; gap: 1rem; }
-    .tab-content { padding: 1rem; }
-    .history-item { flex-direction: column; gap: 0.5rem; text-align: center; }
-    .preferences-form { max-width: 100%; }
-    .genre-tags { gap: 0.25rem; }
-    .genre-tag { padding: 0.25rem 0.5rem; font-size: 0.8rem; }
+    .header {
+        padding: 0.75rem 0;
+    }
     
-    /* Modal & Buttons */
-    .modal-content { margin: 1rem; padding: 1rem; width: calc(100% - 2rem); }
-    .btn-primary, .btn-secondary, .btn-spotify { padding: 10px 16px; font-size: 0.9rem; }
+    .header-container {
+        flex-wrap: wrap;
+        padding: 0 1rem;
+        gap: 0.75rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* Logo */
+    .logo {
+        order: 1;
+        flex-shrink: 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+    
+    .logo img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Header actions (theme toggle, logout) */
+    .header-actions {
+        order: 2;
+        display: flex;
+        flex-direction: row !important;
+        gap: 0.5rem;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+    
+    /* Navigation - Second row but HORIZONTAL */
+    .main-nav {
+        order: 3;
+        width: 100%;
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+    
+    .nav-list {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 0.25rem 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .nav-list::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .nav-item {
+        display: inline-block;
+        flex-shrink: 0;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        display: block;
+    }
+    
+    #userNameDisplay {
+        font-size: 0.8rem;
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .btn-logout {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .theme-icon {
+        font-size: 1.1rem;
+    }
+    
+    /* ========================================
+       AUTH SECTION - TABS HORIZONTAL
+       ======================================== */
+    
+    .auth-section {
+        padding: 1.5rem 1rem;
+        min-height: auto;
+    }
+    
+    .auth-container {
+        padding: 1.5rem 1.25rem;
+        margin: 0 auto;
+        max-width: calc(100% - 2rem);
+        width: 100%;
+    }
+    
+    /* Tabs MUST be horizontal */
+    .auth-tabs {
+        display: flex !important;
+        flex-direction: row !important;
+        margin-bottom: 1.5rem;
+        gap: 0;
+    }
+    
+    .tab-button {
+        flex: 1;
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .tab-slider {
+        width: 50%;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.4rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.9rem;
+    }
+    
+    .btn-spotify {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    /* ========================================
+       PROFILE
+       ======================================== */
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .profile-avatar img {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .profile-stats {
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .stat {
+        min-width: 80px;
+    }
+    
+    /* ========================================
+       CONTENT GRIDS
+       ======================================== */
+    
+    .about-grid,
+    .features-list,
+    .playlist-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .about-card {
+        padding: 1rem;
+    }
+    
+    /* ========================================
+       CAMERA & CONTROLS
+       ======================================== */
+    
+    .camera-container {
+        margin: 0 0.5rem;
+    }
+    
+    .camera-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .camera-controls .btn-primary,
+    .camera-controls .btn-secondary {
+        width: 100%;
+    }
+    
+    /* ========================================
+       BUTTONS
+       ======================================== */
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-spotify {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
 }
 
-/* Extra Small Mobile (320px - 480px) */
+/* ============================================
+   SMALL MOBILE (320px - 480px)
+   ============================================ */
+
 @media (max-width: 480px) {
-    .container { padding: 0 10px; }
-    .hero h2 { font-size: 1.5rem; } .hero p { font-size: 0.9rem; }
-    .camera-container { margin: 0 5px; }
-    .mood-result, .playlist-item, .profile-header, .about-card { padding: 0.5rem; }
-    .auth-container { padding: 0.5rem; margin: 0 5px; }
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    /* Header */
+    .header-container {
+        padding: 0 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1rem;
+    }
+    
+    .logo img {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .nav-list {
+        gap: 0.35rem;
+    }
+    
+    .nav-link {
+        padding: 0.45rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    #userNameDisplay {
+        font-size: 0.75rem;
+        max-width: 60px;
+    }
+    
+    .btn-logout {
+        padding: 0.45rem 0.65rem;
+        font-size: 0.8rem;
+    }
+    
+    .theme-toggle {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Auth */
+    .auth-container {
+        padding: 1.25rem 1rem;
+        max-width: calc(100% - 1.5rem);
+    }
+    
+    .tab-button {
+        padding: 0.65rem 0.4rem;
+        font-size: 0.85rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.3rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.85rem;
+    }
+    
+    .btn-spotify {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Profile */
+    .profile-header {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .profile-avatar img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .profile-stats {
+        gap: 1rem;
+    }
 }
 
-/* Tablet (768px - 1023px) */
+/* ============================================
+   EXTRA SMALL MOBILE (320px - 360px)
+   ============================================ */
+
+@media (max-width: 360px) {
+    .logo h1 {
+        font-size: 0.95rem;
+    }
+    
+    .logo img {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .nav-link {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    #userNameDisplay {
+        font-size: 0.7rem;
+        max-width: 50px;
+    }
+    
+    .btn-logout {
+        padding: 0.4rem 0.55rem;
+        font-size: 0.75rem;
+    }
+    
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .tab-button {
+        padding: 0.6rem 0.3rem;
+        font-size: 0.8rem;
+    }
+    
+    .auth-container {
+        padding: 1rem 0.875rem;
+    }
+}
+
+/* ============================================
+   TABLET (768px - 1023px)
+   ============================================ */
+
 @media (min-width: 768px) and (max-width: 1023px) {
-    .header .container { flex-direction: row; }
-    .nav { flex-direction: row; gap: 1rem; }
-    .hero { padding: 3rem 0; } .hero h2 { font-size: 2.5rem; }
-    .camera-controls { flex-direction: row; justify-content: center; }
-    .playlist-item { flex-direction: row; text-align: left; }
-    .playlist-actions { flex-direction: row; gap: 1rem; }
-    .playlist-actions .btn-primary, .playlist-actions .btn-secondary { width: auto; }
-    .about-grid, .features-list, .playlist-grid { grid-template-columns: repeat(2, 1fr); }
-    .auth-tabs, .profile-tabs { flex-direction: row; }
-    .tab-button { border-bottom: 2px solid transparent; }
-    .tab-button.active { border-bottom-color: var(--primary-color); }
-    .profile-header { flex-direction: row; text-align: left; }
-    .profile-avatar img { width: 100px; height: 100px; }
-    .history-item { flex-direction: row; text-align: left; }
+    .header-container {
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+    }
+    
+    .main-nav {
+        order: initial;
+        width: auto;
+        margin-top: 0;
+        flex: 1;
+    }
+    
+    .nav-list {
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .hero {
+        padding: 3rem 0;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .about-grid,
+    .features-list,
+    .playlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .profile-header {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .profile-avatar img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
-/* Desktop (1024px+) */
+/* ============================================
+   DESKTOP (1024px+)
+   ============================================ */
+
 @media (min-width: 1024px) {
-    .container { max-width: 1200px; }
-    .hero h2 { font-size: 3rem; }
-    .about-grid, .features-list, .playlist-grid { grid-template-columns: repeat(3, 1fr); }
-    .profile-avatar img { width: 120px; height: 120px; }
-    .playlist-item:hover, .playlist-card:hover { transform: translateY(-4px); }
-    .about-card:hover { transform: translateY(-6px); }
+    .container {
+        max-width: 1200px;
+    }
+    
+    .hero h2 {
+        font-size: 3rem;
+    }
+    
+    .about-grid,
+    .features-list,
+    .playlist-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .profile-avatar img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .playlist-card:hover,
+    .about-card:hover {
+        transform: translateY(-4px);
+    }
 }
 
-/* Large Desktop (1440px+) */
+/* ============================================
+   LARGE DESKTOP (1440px+)
+   ============================================ */
+
 @media (min-width: 1440px) {
-    .container { max-width: 1400px; }
-    .about-grid, .playlist-grid, .features-list { grid-template-columns: repeat(4, 1fr); }
+    .container {
+        max-width: 1400px;
+    }
+    
+    .about-grid,
+    .playlist-grid,
+    .features-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-/* Landscape Mobile */
-@media (max-width: 767px) and (orientation: landscape) {
-    .hero { padding: 1rem 0; } .hero h2 { font-size: 1.5rem; }
-    .camera-container { max-width: 480px; }
-    .profile-header { flex-direction: row; text-align: left; }
-    .profile-avatar img { width: 60px; height: 60px; }
-    .auth-container { max-width: 500px; }
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .header {
+        padding: 0.5rem 0;
+    }
+    
+    .header-container {
+        gap: 0.5rem;
+    }
+    
+    .main-nav {
+        margin-top: 0;
+    }
+    
+    .auth-section {
+        padding: 1rem;
+        min-height: auto;
+    }
+    
+    .auth-container {
+        padding: 1rem 1.5rem;
+        max-width: 500px;
+    }
+    
+    .profile-header {
+        padding: 1rem;
+    }
 }
 
-/* Accessibility & Touch */
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    *, .pulse, .fade-in { animation: none !important; transition-duration: 0.01ms !important; }
+    *,
+    .pulse,
+    .fade-in,
+    .tab-slider {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
+/* High Contrast */
 @media (prefers-contrast: high) {
-    :root { --bg-primary: #000; --bg-secondary: #111; --text-primary: #fff; --primary-color: #00ff00; }
-    .btn-primary, .btn-secondary, .btn-spotify { border: 2px solid currentColor; }
+    :root {
+        --bg-primary: #000;
+        --bg-secondary: #111;
+        --text-primary: #fff;
+        --primary-color: #00ff00;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-spotify,
+    .nav-link {
+        border: 2px solid currentColor;
+    }
 }
 
+/* Touch Devices */
 @media (hover: none) and (pointer: coarse) {
-    .btn-primary, .btn-secondary, .btn-spotify, .nav-link, .tab-button { min-height: 44px; }
-    .playlist-item { min-height: 60px; }
-    .genre-tag { min-height: 36px; display: flex; align-items: center; justify-content: center; }
+    .btn-primary,
+    .btn-secondary,
+    .btn-spotify,
+    .nav-link,
+    .tab-button,
+    .theme-toggle,
+    .btn-logout {
+        min-height: 44px;
+    }
+    
+    .nav-item,
+    .playlist-item {
+        min-height: 44px;
+    }
 }
 
-/* Print */
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
 @media print {
-    .header, .footer, .camera-section, .camera-controls, .btn-primary, .btn-secondary, .btn-spotify, .modal { display: none !important; }
-    body { background: white !important; color: black !important; }
-    .about-card, .playlist-item, .mood-result { background: white !important; border: 1px solid #ccc !important; }
+    .header,
+    .footer,
+    .camera-section,
+    .camera-controls,
+    .btn-primary,
+    .btn-secondary,
+    .btn-spotify,
+    .theme-toggle,
+    .btn-logout {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .about-card,
+    .playlist-item,
+    .mood-result {
+        background: white !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* ============================================
+   CRITICAL OVERRIDES
+   ============================================ */
+
+/* Force horizontal on ALL screen sizes */
+@media (max-width: 1200px) {
+    .header-container {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    
+    .nav-list {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    
+    .auth-tabs {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    
+    .header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+}
+
+/* Ensure no vertical stacking */
+.header-container > *,
+.nav-list > *,
+.auth-tabs > * {
+    display: inline-block !important;
+}
+
+/* Fix any flex-column that might exist */
+.header-container,
+.main-nav,
+.nav-list,
+.auth-tabs,
+.header-actions {
+    flex-direction: row !important;
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 16px !important;
+    }
 }

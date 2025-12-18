@@ -1,7 +1,3 @@
-"""
-Django settings for vibewise_project project.
-"""
-
 import os
 from pathlib import Path
 
@@ -9,12 +5,16 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4*hw-qt+8yvuev-2bsta$7l@tkg)6n!$yihj*xihmsat8k_6rr'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-4*hw-qt+8yvuev-2bsta$7l@tkg)6n!$yihj*xihmsat8k_6rr')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '.onrender.com',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -30,9 +30,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     
-    # Local apps - REMOVED backend.apps. prefix!
+    # Local apps
     'accounts',
-    'authentication',
     'mood_detection',
     'spotify_integration',
     'api',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,13 +69,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vibewise_project.wsgi.application'
 
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database - Works both locally and on Render
+if os.environ.get('DATABASE_URL'):
+    # Production database (PostgreSQL on Render)
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600
+        )
     }
-}
+else:
+    # Development database (SQLite)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
@@ -107,6 +118,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# WhiteNoise configuration for serving static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -120,16 +134,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  # Changed from IsAuthenticated
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
 }
 
 # Spotify Configuration
-SPOTIFY_CLIENT_ID = 'f99dc779642f4540b550a3217ea7a4a6'
-SPOTIFY_CLIENT_SECRET = 'c1a4ac7a6a8d44baa04cff86a38a1c8d'
-SPOTIFY_REDIRECT_URI = 'http://127.0.0.1:8000/callback/'
+SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID', 'f99dc779642f4540b550a3217ea7a4a6')
+SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET', 'c1a4ac7a6a8d44baa04cff86a38a1c8d')
+SPOTIFY_REDIRECT_URI = os.environ.get('SPOTIFY_REDIRECT_URI', 'http://127.0.0.1:8000/callback/')
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
@@ -205,3 +219,17 @@ SESSION_COOKIE_AGE = 86400  # 1 day
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
+
+# Security settings for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# Admin site customization
+ADMIN_SITE_HEADER = "VibeWise Admin Panel"
+ADMIN_SITE_TITLE = "VibeWise Admin"
+ADMIN_INDEX_TITLE = "Welcome to VibeWise Administration"

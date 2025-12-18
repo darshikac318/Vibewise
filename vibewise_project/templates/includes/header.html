@@ -33,3 +33,118 @@
         </div>
     </div>
 </header>
+
+<!-- ⚠️ CRITICAL: Pre-load theme before ANY rendering -->
+<script>
+(function() {
+    'use strict';
+    
+    // Load theme IMMEDIATELY from localStorage
+    const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+    
+    // Apply to both html and body
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (document.body) {
+        document.body.setAttribute('data-theme', savedTheme);
+    }
+    
+    console.log(`⚡ Header: Theme pre-loaded: ${savedTheme}`);
+})();
+</script>
+
+<!-- ⚠️ CRITICAL: Auth check script for header -->
+<script>
+// Check authentication status and update header on EVERY page
+(function() {
+    'use strict';
+    
+    async function updateHeaderAuth() {
+        try {
+            const response = await fetch('/api/spotify/status/', {
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            });
+            
+            const data = await response.json();
+            
+            const loginNavItem = document.getElementById('loginNavItem');
+            const profileNavItem = document.getElementById('profileNavItem');
+            const userDisplay = document.getElementById('userNameDisplay');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (data.connected && data.user) {
+                // User is logged in
+                console.log('✅ User logged in:', data.user.name);
+                
+                if (loginNavItem) loginNavItem.style.display = 'none';
+                if (profileNavItem) profileNavItem.style.display = 'block';
+                if (userDisplay) {
+                    userDisplay.textContent = data.user.name || 'User';
+                    userDisplay.style.display = 'inline-block';
+                }
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            } else {
+                // User is not logged in
+                console.log('❌ User not logged in');
+                
+                if (loginNavItem) loginNavItem.style.display = 'block';
+                if (profileNavItem) profileNavItem.style.display = 'none';
+                if (userDisplay) userDisplay.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Header auth check error:', error);
+            // On error, assume not logged in
+            const loginNavItem = document.getElementById('loginNavItem');
+            const profileNavItem = document.getElementById('profileNavItem');
+            if (loginNavItem) loginNavItem.style.display = 'block';
+            if (profileNavItem) profileNavItem.style.display = 'none';
+        }
+    }
+    
+    // Update theme icon based on current theme
+    function updateThemeIcon() {
+        const themeIcons = {
+            'dark': '🌙',
+            'light': '☀️',
+            'soft': '🌸',
+            'girly': '💖',
+            'cool': '🌊'
+        };
+        
+        const currentTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+        const icon = themeIcons[currentTheme] || '🌙';
+        
+        const themeIconElements = document.querySelectorAll('.theme-icon');
+        themeIconElements.forEach(el => {
+            el.textContent = icon;
+        });
+    }
+    
+    // Run immediately when header loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderAuth();
+            updateThemeIcon();
+        });
+    } else {
+        updateHeaderAuth();
+        updateThemeIcon();
+    }
+    
+    // Also run when page becomes visible (for navigation)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            updateHeaderAuth();
+            updateThemeIcon();
+        }
+    });
+    
+    // Listen for theme changes
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'vibeWiseTheme') {
+            updateThemeIcon();
+        }
+    });
+})();
+</script>

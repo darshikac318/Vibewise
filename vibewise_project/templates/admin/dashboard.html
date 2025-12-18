@@ -1,0 +1,69 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>VibeWise Dashboard</h1>
+
+<div class="module" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 20px 0;">
+    <div style="background: #417690; color: white; padding: 20px; border-radius: 8px;">
+        <h2>{{ total_users }}</h2>
+        <p>Total Users</p>
+    </div>
+    
+    <div style="background: #1db954; color: white; padding: 20px; border-radius: 8px;">
+        <h2>{{ total_detections }}</h2>
+        <p>Mood Detections</p>
+    </div>
+    
+    <div style="background: #ff6b6b; color: white; padding: 20px; border-radius: 8px;">
+        <h2>{{ total_playlists }}</h2>
+        <p>Playlists Created</p>
+    </div>
+    
+    <div style="background: #ffa726; color: white; padding: 20px; border-radius: 8px;">
+        <h2>{{ new_users_week }}</h2>
+        <p>New Users (7 days)</p>
+    </div>
+</div>
+
+<div class="module" style="margin: 20px 0;">
+    <h2>Most Popular Moods</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Mood</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mood in popular_moods %}
+            <tr>
+                <td>{{ mood.mood|capfirst }}</td>
+                <td>{{ mood.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="module" style="margin: 20px 0;">
+    <h2>Recent Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in recent_users %}
+            <tr>
+                <td>{{ user.display_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.created_at|date:"M d, Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -3,9 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from spotify_integration.admin_views import admin_dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/dashboard/', admin_dashboard, name='admin_dashboard'),
     
     # API endpoints
     path('api/', include('api.urls')),

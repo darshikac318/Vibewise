@@ -80,6 +80,23 @@
             display: inline-block;
         }
     </style>
+
+    <script>
+        (function() {
+            'use strict';
+            const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (document.body) {
+                document.body.setAttribute('data-theme', savedTheme);
+            } else {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.setAttribute('data-theme', savedTheme);
+                });
+            }
+            
+            console.log(`✅ Theme pre-loaded: ${savedTheme}`);
+        })();
+    </script>
 </head>
 <body>
     <div class="callback-container">
