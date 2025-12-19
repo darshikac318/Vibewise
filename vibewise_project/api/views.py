@@ -287,68 +287,93 @@ class SpotifyViewSet(viewsets.ViewSet):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     @action(detail=False, methods=['post'])
-    def create_playlist(self, request):
-        """Create personalized Spotify playlist based on mood AND user's listening habits"""
-        mood = request.data.get('mood')
-        if not mood:
-            return Response({
-                'error': 'Mood is required'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        if not request.user.is_authenticated:
-            return Response({
-                'error': 'Please login with Spotify to create playlists'
-            }, status=status.HTTP_401_UNAUTHORIZED)
-        
-        if not request.user.spotify_access_token:
-            return Response({
-                'error': 'Spotify not connected. Please connect your Spotify account.'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        access_token = request.user.spotify_access_token
-        spotify_id = request.user.spotify_id
+    def create_playlist(request):
+        from spotify_integration.models import SpotifyUser, MoodDetectionResult, SpotifyPlaylist
+        from datetime import datetime
+        import spotipy
         
         try:
-            spotify_service = SpotifyService()
+            mood = request.data.get('mood')
             
-            # ✅ GET USER'S ACTUAL LISTENING HABITS
-            print(f"🎵 Fetching listening habits for {request.user.email}...")
-            user_genres = spotify_service.get_user_top_genres(access_token)
-            print(f"User's top genres: {user_genres}")
+            # Get Spotify auth from session
+            spotify_data = request.session.get('spotify_auth', {})
+            access_token = spotify_data.get('access_token')
             
-            # Create personalized playlist based on BOTH mood and user preferences
-            playlist = spotify_service.create_personalized_mood_playlist(
-                access_token,
-                spotify_id,
-                mood,
-                user_genres  # ✅ Uses actual user listening history
+            if not access_token:
+                return Response({'error': 'Not authenticated'}, status=401)
+            
+            # Initialize Spotify
+            sp = spotipy.Spotify(auth=access_token)
+            user_profile = sp.current_user()
+            
+            # ✅ SAVE SPOTIFY USER
+            spotify_user, created = SpotifyUser.objects.update_or_create(
+                user=request.user,
+                defaults={
+                    'spotify_id': user_profile['id'],
+                    'display_name': user_profile.get('display_name', ''),
+                    'email': user_profile.get('email', ''),
+                    'access_token': access_token,
+                    'refresh_token': spotify_data.get('refresh_token', ''),
+                    'token_expires_at': datetime.fromtimestamp(spotify_data.get('expires_at', 0))
+                }
             )
             
-            # Save to database
-            db_playlist = SpotifyPlaylist.objects.create(
+            # ✅ SAVE MOOD DETECTION
+            MoodDetectionResult.objects.create(
                 user=request.user,
-                spotify_id=playlist['id'],
-                name=playlist['name'],
-                description=playlist.get('description', ''),
-                image_url=playlist.get('images', [{}])[0].get('url') if playlist.get('images') else None,
-                total_tracks=playlist.get('tracks', {}).get('total', 0),
-                is_public=playlist.get('public', True)
+                mood=mood,
+                confidence=0.85
+            )
+            
+            # Create playlist on Spotify
+            playlist_name = f"VibeWise - {mood.title()} Vibes"
+            new_playlist = sp.user_playlist_create(
+                user_profile['id'],
+                playlist_name,
+                public=True
+            )
+            
+            # Get user's top tracks
+            top_tracks = sp.current_user_top_tracks(limit=30, time_range='medium_term')
+            track_uris = [track['uri'] for track in top_tracks['items']]
+            
+            # Add tracks to playlist
+            if track_uris:
+                sp.playlist_add_items(new_playlist['id'], track_uris)
+            
+            # ✅ GET ACTUAL TRACK COUNT FROM SPOTIFY
+            playlist_info = sp.playlist(new_playlist['id'])
+            actual_tracks = playlist_info['tracks']['total']
+            
+            print(f"✅ Created playlist with {actual_tracks} tracks")
+            
+            # ✅ SAVE WITH CORRECT TRACK COUNT
+            SpotifyPlaylist.objects.create(
+                user=request.user,
+                spotify_id=new_playlist['id'],
+                name=playlist_name,
+                spotify_url=new_playlist['external_urls']['spotify'],
+                total_tracks=actual_tracks,  # ← CORRECT COUNT!
+                mood=mood,
+                is_public=True
             )
             
             return Response({
-                'playlist': SpotifyPlaylistSerializer(db_playlist).data,
-                'spotify_url': playlist['external_urls']['spotify'],
-                'genres_used': user_genres[:3],
-                'message': f'Created personalized {mood} playlist with your favorite genres: {", ".join(user_genres[:3])}!'
+                'success': True,
+                'message': f'Created playlist with {actual_tracks} tracks!',
+                'spotify_url': new_playlist['external_urls']['spotify'],
+                'playlist': {
+                    'name': playlist_name,
+                    'total_tracks': actual_tracks
+                }
             })
             
         except Exception as e:
-            print(f"Playlist creation error: {e}")
+            print(f"Error: {e}")
             import traceback
             traceback.print_exc()
-            return Response({
-                'error': f'Failed to create playlist: {str(e)}'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=500)
     
     @action(detail=False, methods=['get'])
     def playlists(self, request):

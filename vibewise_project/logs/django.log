@@ -1386,3 +1386,294 @@ Watching for file changes with StatReloader
 C:\Users\darshika\OneDrive\Desktop\vibewise\vibewise_project\settings.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6364
+"GET /static/css/themes.css HTTP/1.1" 304 0
+"GET /static/js/theme.js HTTP/1.1" 304 0
+"GET /static/js/utils.js HTTP/1.1" 304 0
+"GET /static/js/auth.js HTTP/1.1" 304 0
+"GET /static/js/camera.js HTTP/1.1" 304 0
+"GET /static/css/components.css HTTP/1.1" 200 12301
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3221
+"GET /login/ HTTP/1.1" 200 13106
+"GET /static/css/auth.css HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /callback/?code=AQAfxJpg9jFPFpg_-MtRNch95pfCbxvZYQKv9SrlDzqKKKMLJFcInv9JzgeI8rl4m_W36HWJoUOb4gtDOQjexrq9-Klmmh0DU4R3-5Pg3fCytREqb7Hfs1dg5nkwl11_GacSrEk4stvCuGzPAZ1kcwfPSggs2nkjD7IwQ5p3sCfSU0u81aHIrzJlVDW14wCdLPZfW_zZuZL9eRMdxozudG7UK1PzJzr2b2wxSDuorWaJSZE1zXba0bsfkw5bLcxNwMaz6kgQqaKkhVVSixQ8suNdJHT1jC5faycMQuJCTfnuKGsnFzqldQ-m2bjPSiExWTTfmCR95V2g59aOiKlLM97eHwIS2KzIrdiSRuLl29yiruS-jP0QrPjp3jD2l71RANoDIHrirM1MijDK HTTP/1.1" 200 17617
+Internal Server Error: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 500 87
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET / HTTP/1.1" 200 6364
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /about/ HTTP/1.1" 200 9642
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /profile/ HTTP/1.1" 200 19856
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 668
+"GET /api/mood/history/ HTTP/1.1" 200 2038
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3107
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /about/ HTTP/1.1" 200 9642
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /profile/ HTTP/1.1" 200 19856
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 668
+"GET /api/mood/history/ HTTP/1.1" 200 2038
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3107
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"POST /api/spotify/logout/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQBA-vJ_8XIfXxuu6jzd3-9IHhBM4eX2TFG2ebjqp270H1pfx1-_wqLcMq8ylP7ooEik75LGvVwHzOmb5_HeSU23JH1nBKh1O4Yc3XvUSv-eSg4VVim48lS0WOS06tdLzFnQXq9TtdSxvpOu2qzmw3RY5fzPeFTCj6aDwgjsAHcXrjd7PPUyuwyJMmaqJR6z6B0rmOEZrv1iGStJmW7zpIykNxPN_UhyLKMWld-rd87vOsBRF9g1dXy78LTPv_0r2B7DKdfNf6tpp3mYsZHKAkEoEQRLg23LOmT7AHgExqF2TnNSTdgYp0noavFAuw5bLo6VCLeWRzgv0rquf1pUef40Gi9m6RDQ8prP7DFy7TGucEbRNJ87qlwup9_O-T27OPmSDFDQBrXgKkta HTTP/1.1" 200 17617
+Internal Server Error: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 500 87
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"POST /api/mood/detect/ HTTP/1.1" 200 125
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"POST /api/mood/detect/ HTTP/1.1" 200 127
+"POST /api/spotify/create_playlist/ HTTP/1.1" 200 535
+"GET /about/ HTTP/1.1" 200 9642
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /profile/ HTTP/1.1" 200 19856
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /about/ HTTP/1.1" 200 9642
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/login/?next=/admin/ HTTP/1.1" 200 3718
+"POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 7478
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+"GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifytrack/ HTTP/1.1" 200 9057
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyuser/ HTTP/1.1" 200 10602
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3332
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/?created_at__year=2025 HTTP/1.1" 200 19059
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/? HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/?created_at__year=2025 HTTP/1.1" 200 19059
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQD3vmjXGBPfQSguGDo8j2Evl9CnOZlGw8CKJEYO2Ss8lvM8JKi5siyk-OEpu2QRKQgDHCkYEgLiyTasYY0038zL0nocfPECPUUZYrtUAODEp5dE6LO6U8W3Aqb4YZPCI2UPxHmnC6VjhctOAh20UIlIk7k-G2Q_234FSg6qeoGmUzMLPER3SEIfIIkFgSBlva1yWubZm1ucg3sS1IjRUVmmpn03yU-DP4gObMst2j0KkvTclHbHdfLctrLKu4ET-hwZAU0UjaAGgPSOgnjaSm01vQDXDc25_uko4AuvB_fbuRWlZ3MSE92EFlK32hRzmrB4yqB34xSjA6O-Oz6_Gcms6bqgt2Kwjpj0Qfqm-qTPx6rjqOs05U9r802zaaa_rBJJ5rOzC02sqEhF HTTP/1.1" 200 17617
+Internal Server Error: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 500 87
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /profile/ HTTP/1.1" 200 19856
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6364
+"GET /static/css/components.css HTTP/1.1" 304 0
+"GET /static/js/authCheck.js HTTP/1.1" 304 0
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3221
+"GET /profile/ HTTP/1.1" 200 19434
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+"POST /api/spotify/logout/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQDmO2T0NY2SLJYK9KTMImai1K0fv1twAZ86FCJenLlmpy3r1Uup2qpoOef4tSvBARENaAiDV9kXIC4_nlkdBMMHiUzJh3gTZRrOmRcyzidWjIJgw2kgnAGIP6V-eCLCUnTFWaTMQkBO9Z1hIf2YZTIrLJPWH46QqvqNGXEevDiNF3G5p27LrxIMfM5r6kmKRoKWDN4A2EmcoB6ZQbAqhXXij4FL_246MYciggphlpl1JT5LqgMwV1ufZXtVIv1Q_BZRAiPoiF3b4K3prbNabSDOkzrcD8DnTjMNu3IkMyXpukS-YJBJsVKLIzszjKv5bvfN-W3oeTRvNMg49HALxYNwV7VsyoCIZXUloKsVAEti2RiIqIYla7Y2hxRKe3udPPo_P2mrfaqrSNPR HTTP/1.1" 200 17617
+Internal Server Error: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 500 87
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /profile/ HTTP/1.1" 200 19434
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+"GET /profile/ HTTP/1.1" 200 19434
+"GET /static/css/style.css HTTP/1.1" 200 10360
+"GET /static/assets/images/logo.png HTTP/1.1" 200 21283
+"GET /static/css/components.css HTTP/1.1" 200 12301
+"GET /static/js/utils.js HTTP/1.1" 200 5680
+"GET /static/css/themes.css HTTP/1.1" 200 9158
+"GET /static/js/auth.js HTTP/1.1" 200 8705
+"GET /static/css/responsive.css HTTP/1.1" 200 13370
+"GET /static/js/theme.js HTTP/1.1" 200 5591
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /login/ HTTP/1.1" 200 13106
+"GET /static/css/auth.css HTTP/1.1" 200 8213
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQDUXzkqP4mmw6iULF0B2Tja3cMEk2f1BGhlM4lcFdu7daed0tYAt1fOjM6klthBIhdW3qGEm8vCLrfY9HpqfVsEfr50COJcdDbBJOH6ofHMDZ0pWVEj0GZZLUWWO5jwA9WRsl9ixwE7cKG4N8xGBDjIaulmV6gzHZ3oExmESjW5iutbncTsdEdymvl1Bf9bYHcDuh3XM3TtrwJ-NXlflCf9NcNkxiFz41Z4l8hVKDJv8-gi-liptBLY73Wo6_SjRB2rGr5gtMD8_PbJ8xDg2yiW4VoZMXfBp6LD5xrF00TJAWJpYMl2I8OE4PwkvKG9VWWoVKxbpGXX4UwXaUluvX5UVFPLixzomoU_9MMZq6BhNWCwZeE1gNEgjojVPyqinzqixm4439g4y_gK HTTP/1.1" 200 17617
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /profile/ HTTP/1.1" 200 19434
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+Not Found: /profile/undefined
+"GET /profile/undefined HTTP/1.1" 404 3239
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+Not Found: /profile/undefined
+"GET /profile/undefined HTTP/1.1" 404 3239
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/login/?next=/admin/ HTTP/1.1" 200 3718
+"POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 7478
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifytrack/ HTTP/1.1" 200 9057
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyuser/ HTTP/1.1" 200 10602
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/auth/group/ HTTP/1.1" 200 8664
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/ HTTP/1.1" 200 6759
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifytrack/ HTTP/1.1" 200 9057
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3221
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /api/spotify/status/ HTTP/1.1" 200 19
+"GET /callback/?code=AQBp5q-m1dyw9tEqMVfjMs-8rAGhHxXtTIoWF_dHSF_4aBbV8PyvxaEX9zWbx4RAVk-Yp2zzX9R8eQsqFs15dwP_2C1DUBLEUm3k8Oxmr-at1Xj14YEb0eTEykD--Dq75souozthnucxd_TfWGQy6WOj0E4akesr0XPk7Hbijd2s71p6ahHUjSYN_jCzalJaL-hQ4samafxXfYbEt7JDRIgMKeEe3QzAbnsQWz68bQ2F-DxHA3ar_siFQPQhnb2BBfy2cH_ZBmgO3nxqUB4D8EW9KaqPT1kaJuk8JDXh6Sjxemq8w2aZF3Uqdn6N76tvMUiUwFJw_dSi_G9BY8SUKzK1MAU3ATxneWqjk-OuAS6ENqq77X7gmIeohsotbDnsffvTZc-bkk3yEdYT HTTP/1.1" 200 17617
+Internal Server Error: /api/spotify/connect/
+"POST /api/spotify/connect/ HTTP/1.1" 500 87
+"POST /api/spotify/connect/ HTTP/1.1" 200 673
+"GET /login/ HTTP/1.1" 200 13106
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /profile/ HTTP/1.1" 200 19434
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /api/dashboard/stats/ HTTP/1.1" 200 702
+"GET /api/mood/history/ HTTP/1.1" 200 2041
+"GET /api/spotify/playlists/ HTTP/1.1" 200 3432
+"GET / HTTP/1.1" 200 6364
+"GET /api/spotify/status/ HTTP/1.1" 200 140
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/login/?next=/admin/ HTTP/1.1" 200 3718
+"POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 7478
+"GET /admin/spotify_integration/mooddetectionresult/ HTTP/1.1" 200 10958
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyplaylist/ HTTP/1.1" 200 18681
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyuser/ HTTP/1.1" 200 10602
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifytrack/ HTTP/1.1" 200 9057
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
+"GET /admin/spotify_integration/spotifyuser/ HTTP/1.1" 200 10602
+"GET /admin/jsi18n/ HTTP/1.1" 200 3343
