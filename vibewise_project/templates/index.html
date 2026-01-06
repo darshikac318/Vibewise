@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeWise - Mood-Based Playlist Recommendation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <script>
+        (function() {
+            'use strict';
+            const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (document.body) {
+                document.body.setAttribute('data-theme', savedTheme);
+            } else {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.setAttribute('data-theme', savedTheme);
+                });
+            }
+            
+            console.log(`✅ Theme pre-loaded: ${savedTheme}`);
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'assets/images/logo.png' %}" alt="VibeWise">
+                <h1>VibeWise</h1>
+            </div>
+            
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li class="nav-item" id="loginNavItem"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                    <li class="nav-item" id="profileNavItem" style="display: none;"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <span id="userNameDisplay" style="display: none; margin-right: 1rem; color: var(--primary-color); font-weight: 600;"></span>
+                <button id="logoutBtn" class="btn-logout" style="display: none;">Logout</button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h2>Discover Music That Matches Your Mood</h2>
+                <p>Let AI detect your emotions and create the perfect Spotify playlist</p>
+                <button class="btn-primary" id="startDetectionBtn">Start Detection</button>
+            </div>
+        </section>
+
+        <!-- Camera Section -->
+        <section class="camera-section" id="cameraSection" style="display: none;">
+            <div class="container">
+                <h3>Mood Detection</h3>
+                <div class="camera-container" id="videoContainer" style="display: none;">
+                    <video id="video" autoplay playsinline style="width: 100%; max-width: 640px; border-radius: 12px;"></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                </div>
+
+                <div class="camera-controls" style="margin-top: 1rem;">
+                    <button class="btn-primary" id="detectButton">Detect Mood</button>
+                    <button class="btn-secondary" id="stopCamera" style="display: none;">Stop Camera</button>
+                </div>
+
+                <div id="loadingIndicator" style="display: none; text-align: center; margin-top: 20px;">
+                    <p style="color: var(--primary-color); font-weight: 500;">🔍 Analyzing your mood...</p>
+                </div>
+
+                <div id="errorMessage" class="error" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="container">
+                <div id="moodResult" style="display: none;"></div>
+                <div id="playlistContainer" style="display: none;">
+                    <h3>Your Mood-Based Playlist</h3>
+                    <div id="playlistContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" style="padding: 4rem 0;">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem;">How It Works</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>📸 Capture</h3>
+                        <p>Allow camera access and let our AI analyze your facial expression</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>🎭 Detect</h3>
+                        <p>Advanced emotion recognition identifies your current mood</p>
+                    </div>
+                    <div class="about-card">
+                        <h3>🎵 Create</h3>
+                        <p>Get a personalized Spotify playlist matching your emotional state</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Load scripts in correct order -->
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/authCheck.js' %}"></script>
+    <script src="{% static 'js/camera.js' %}"></script>
+    
+    <script>
+        // ⚠️ REMOVED DUPLICATE AUTH CHECK - camera.js handles it
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Homepage loaded');
+            
+            // Check if we should auto-start camera (after login)
+            if (window.AuthCheck) {
+                AuthCheck.checkAutoStart();
+            }
+            
+            // ⚠️ DON'T ADD EXTRA CLICK HANDLER HERE
+            // camera.js already handles the startDetectionBtn click
+        });
+    </script>
+</body>
+</html>
