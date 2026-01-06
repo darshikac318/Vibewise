@@ -1,0 +1,28 @@
+databases:
+  - name: vibewise-db
+    databaseName: vibewise
+    user: vibewise_user
+    plan: free
+
+services:
+  - type: web
+    name: vibewise
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn vibewise_project.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vibewise-db
+          property: connectionString
+      - key: SPOTIFY_CLIENT_ID
+        value: f99dc779642f4540b550a3217ea7a4a6
+      - key: SPOTIFY_CLIENT_SECRET
+        value: c1a4ac7a6a8d44baa04cff86a38a1c8d

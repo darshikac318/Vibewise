@@ -1,0 +1,423 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - VibeWise</title>
+    
+    <script>
+    (function() {
+        'use strict';
+        const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (document.body) {
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+        console.log(`⚡ Profile: Theme pre-loaded: ${savedTheme}`);
+    })();
+    </script>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+<body>
+    {% include 'includes/header.html' %}
+
+    <main class="main">
+        <div id="loadingState" style="text-align: center; padding: 4rem 2rem;">
+            <div style="display: inline-block; border: 4px solid var(--bg-tertiary); border-top: 4px solid var(--primary-color); border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite;"></div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading profile...</p>
+        </div>
+
+        <div id="notLoggedIn" style="display: none; text-align: center; padding: 4rem 2rem;">
+            <h2>Please Login to View Profile</h2>
+            <p style="margin: 2rem 0;">Connect with Spotify to use VibeWise</p>
+            <a href="{% url 'login' %}" class="btn-primary" style="display: inline-block; text-decoration: none;">
+                Go to Login
+            </a>
+        </div>
+
+        <div id="loggedInContent" style="display: none;">
+            <section class="profile-header">
+                <div class="container">
+                    <div class="profile-avatar">
+                        <img id="profileImage" src="{% static 'assets/images/logo.png' %}" alt="Profile" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--primary-color);">
+                    </div>
+                    <div class="profile-info" style="flex: 1;">
+                        <h2 id="profileName">Loading...</h2>
+                        <p id="profileEmail" style="color: var(--text-secondary);"></p>
+                        <p id="spotifyStatus" style="color: var(--primary-color); font-weight: 500;"></p>
+                        
+                        <div class="profile-stats" style="display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                            <div class="stat">
+                                <span class="stat-number" id="totalDetections">0</span>
+                                <span class="stat-label">Mood Detections</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="totalPlaylists">0</span>
+                                <span class="stat-label">Playlists Created</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="favoriteGenre">---</span>
+                                <span class="stat-label">Top Mood</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <div id="spotifyCard" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow);">
+                        <h3 style="margin-bottom: 1rem;">🎵 Spotify Connection</h3>
+                        <div id="spotifyInfo">
+                            <p style="color: var(--text-secondary);">Loading Spotify information...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <h3 style="margin-bottom: 1.5rem;">Recent Mood Detections</h3>
+                    <div id="recentMoods" style="display: grid; gap: 1rem;">
+                        <p style="color: var(--text-secondary);">Loading recent moods...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="padding: 2rem 0;">
+                <div class="container">
+                    <h3 style="margin-bottom: 1.5rem;">Your VibeWise Playlists</h3>
+                    <div id="userPlaylists" class="playlist-grid">
+                        <p style="color: var(--text-secondary);">Loading playlists...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VibeWise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <script>
+        console.log('🔍 Profile page loading...');
+
+        async function checkAuthAndLoadProfile() {
+            const loadingState = document.getElementById('loadingState');
+            const notLoggedIn = document.getElementById('notLoggedIn');
+            const loggedInContent = document.getElementById('loggedInContent');
+
+            try {
+                console.log('Checking authentication...');
+                
+                const authResponse = await fetch('/api/spotify/status/', {
+                    credentials: 'same-origin',
+                    cache: 'no-cache'
+                });
+                
+                const authData = await authResponse.json();
+                console.log('Auth status:', authData);
+
+                if (authData.connected && authData.user) {
+                    console.log('✅ User is authenticated');
+                    loadingState.style.display = 'none';
+                    notLoggedIn.style.display = 'none';
+                    loggedInContent.style.display = 'block';
+                    loadProfileData(authData.user);
+                    
+                } else {
+                    console.log('❌ User not authenticated');
+                    
+                    loadingState.style.display = 'none';
+                    loggedInContent.style.display = 'none';
+                    notLoggedIn.style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error checking auth:', error);
+                
+                loadingState.style.display = 'none';
+                loggedInContent.style.display = 'none';
+                notLoggedIn.style.display = 'block';
+            }
+        }
+
+        function loadProfileData(user) {
+            console.log('Loading profile data for:', user);
+            
+            document.getElementById('profileName').textContent = user.name || 'Spotify User';
+            document.getElementById('profileEmail').textContent = user.email || user.spotify_id;
+            document.getElementById('spotifyStatus').textContent = '✓ Connected to Spotify';
+            
+            document.getElementById('spotifyInfo').innerHTML = `
+                <div style="display: grid; gap: 0.5rem;">
+                    <p><strong>Spotify ID:</strong> ${user.spotify_id || 'N/A'}</p>
+                    <p><strong>Display Name:</strong> ${user.name || 'N/A'}</p>
+                    <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
+                    <p style="color: var(--primary-color); margin-top: 1rem;">✓ Account Connected</p>
+                </div>
+            `;
+            
+            loadDashboardStats();
+            
+            loadPlaylists();
+            
+            loadRecentMoods();
+        }
+
+        async function loadDashboardStats() {
+            try {
+                console.log('Loading dashboard stats...');
+                
+                const response = await fetch('/api/dashboard/stats/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Stats loaded:', data);
+                    
+                    document.getElementById('totalDetections').textContent = data.total_detections || 0;
+                    document.getElementById('totalPlaylists').textContent = data.playlist_count || 0;
+                    
+                    if (data.mood_stats && data.mood_stats.length > 0) {
+                        const topMood = data.mood_stats[0];
+                        document.getElementById('favoriteGenre').textContent = 
+                            topMood.mood.charAt(0).toUpperCase() + topMood.mood.slice(1);
+                    }
+                } else {
+                    console.error('Failed to load stats');
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadPlaylists() {
+            try {
+                console.log('Loading playlists...');
+                
+                const response = await fetch('/api/spotify/playlists/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Playlists loaded:', data);
+                    
+                    const container = document.getElementById('userPlaylists');
+                    
+                    if (data.playlists && data.playlists.length > 0) {
+                        container.innerHTML = data.playlists.map(playlist => {
+                            console.log('Playlist data:', playlist);
+                            
+                            const trackCount = playlist.total_tracks || 0;
+                            
+                            let spotifyUrl = playlist.spotify_url;
+                            if (!spotifyUrl && playlist.spotify_id) {
+                                spotifyUrl = `https://open.spotify.com/playlist/${playlist.spotify_id}`;
+                            }
+                            
+                            return `
+                            <div class="playlist-card" style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px; box-shadow: var(--shadow);">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">${playlist.name}</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                                    ${trackCount} track${trackCount !== 1 ? 's' : ''}
+                                </p>
+                                <p style="color: var(--primary-color); font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Mood: ${playlist.mood ? playlist.mood.charAt(0).toUpperCase() + playlist.mood.slice(1) : 'Unknown'}
+                                </p>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    ${spotifyUrl ? `
+                                        <a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" 
+                                           onclick="console.log('Opening Spotify URL:', '${spotifyUrl}'); return true;"
+                                           class="btn-secondary" 
+                                           style="display: inline-block; text-decoration: none; font-size: 0.9rem; padding: 0.5rem 1rem; cursor: pointer;">
+                                            🎵 Open in Spotify
+                                        </a>
+                                    ` : ''}
+                                    <button onclick="deletePlaylist(${playlist.id}, '${playlist.name}')" 
+                                            class="btn-secondary" 
+                                            style="font-size: 0.9rem; padding: 0.5rem 1rem; background: #ff6b6b; color: white; border: none; cursor: pointer;">
+                                        🗑️ Delete
+                                    </button>
+                                </div>
+                            </div>
+                            `;
+                        }).join('');
+                    } else {
+                        container.innerHTML = '<p style="color: var(--text-secondary);">No playlists created yet. Start detecting your mood to create playlists!</p>';
+                    }
+                } else {
+                    console.error('Failed to load playlists');
+                    document.getElementById('userPlaylists').innerHTML = 
+                        '<p style="color: #ff6b6b;">Failed to load playlists. Please refresh the page.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading playlists:', error);
+                document.getElementById('userPlaylists').innerHTML = 
+                    '<p style="color: #ff6b6b;">Error loading playlists. Please try again.</p>';
+            }
+        }
+
+        async function loadRecentMoods() {
+            try {
+                console.log('Loading recent moods...');
+                
+                const response = await fetch('/api/dashboard/stats/', {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Recent moods loaded:', data.recent_moods);
+                    
+                    const container = document.getElementById('recentMoods');
+                    
+                    if (data.recent_moods && data.recent_moods.length > 0) {
+                        const moodEmojis = {
+                            'happy': '😊', 'sad': '😢', 'angry': '😠', 'neutral': '😐',
+                            'surprised': '😲', 'fear': '😨', 'disgust': '🤢', 'excited': '🤩',
+                            'confident': '😎', 'motivated': '💪', 'dancing': '💃', 'romantic': '😍',
+                            'peaceful': '😌', 'energetic': '⚡', 'melancholic': '🥺', 'playful': '😜'
+                        };
+                        
+                        container.innerHTML = data.recent_moods.map(mood => `
+                            <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 1rem;">
+                                <span style="font-size: 2rem;">${moodEmojis[mood.mood] || '😊'}</span>
+                                <div style="flex: 1;">
+                                    <p style="font-weight: 600; margin: 0;">
+                                        ${mood.mood.charAt(0).toUpperCase() + mood.mood.slice(1)}
+                                    </p>
+                                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">
+                                        Confidence: ${(mood.confidence * 100).toFixed(1)}%
+                                    </p>
+                                </div>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem;">
+                                    ${new Date(mood.detected_at).toLocaleDateString()}
+                                </p>
+                            </div>
+                        `).join('');
+                    } else {
+                        container.innerHTML = '<p style="color: var(--text-secondary);">No mood detections yet. Start using VibeWise!</p>';
+                    }
+                } else {
+                    console.error('Failed to load recent moods');
+                }
+            } catch (error) {
+                console.error('Error loading recent moods:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Profile page ready');
+            checkAuthAndLoadProfile();
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                console.log('Page visible, refreshing...');
+                checkAuthAndLoadProfile();
+            }
+        });
+        
+        async function deletePlaylist(playlistId, playlistName) {
+            if (!confirm(`Delete "${playlistName}"?\n\nThis will remove it from your VibeWise profile.`)) {
+                return;
+            }
+            
+            try {
+                console.log('Deleting playlist:', playlistId);
+                
+                const csrfToken = getCookie('csrftoken');
+                if (!csrfToken) {
+                    throw new Error('CSRF token not found');
+                }
+                
+                const response = await fetch('/api/spotify/delete-playlist/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        playlist_id: playlistId
+                    })
+                });
+                
+                console.log('Delete response status:', response.status);
+                const data = await response.json();
+                console.log('Delete response:', data);
+                
+                if (response.ok && data.success) {
+                    showNotification('✅ Playlist deleted!', 'success');
+                    
+                    setTimeout(() => {
+                        loadPlaylists();
+                    }, 1000);
+                } else {
+                    throw new Error(data.error || 'Failed to delete playlist');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                showNotification('❌ ' + error.message, 'error');
+            }
+        }
+        
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [cookieName, cookieValue] = cookie.trim().split('=');
+                if (cookieName === name) {
+                    return decodeURIComponent(cookieValue);
+                }
+            }
+            return null;
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: ${type === 'error' ? '#ff6b6b' : type === 'success' ? '#1db954' : '#42a5f5'};
+                color: white;
+                border-radius: 8px;
+                z-index: 10000;
+                font-weight: 500;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

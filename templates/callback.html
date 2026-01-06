@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting to Spotify - VibeWise</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <style>
+        body {
+            background: var(--bg-primary);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .callback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .loader {
+            border: 4px solid var(--bg-tertiary);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status-message {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .status-detail {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .error-container {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            max-width: 500px;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+        
+        .btn-return {
+            margin-top: 1.5rem;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+
+    <script>
+        (function() {
+            'use strict';
+            const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (document.body) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="callback-container">
+        <div class="loader" id="loader"></div>
+        <h2 class="status-message" id="statusMessage">Connecting to Spotify...</h2>
+        <p class="status-detail" id="statusDetail">Please wait while we authenticate your account</p>
+        <div id="errorContainer" class="error-container" style="display: none;">
+            <p class="error-message" id="errorMessage"></p>
+            <a href="/login/" class="btn-return">Return to Login</a>
+        </div>
+    </div>
+
+    <script>
+        console.log('Callback page loaded');
+        let callbackProcessed = false;
+        
+        async function handleSpotifyCallback() {
+            if (callbackProcessed) {
+                console.log('⚠️ Callback already processed, skipping...');
+                return;
+            }
+            
+            callbackProcessed = true;
+            console.log('🔄 Processing callback (ONCE)...');
+            
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                const error = urlParams.get('error');
+                
+                const loader = document.getElementById('loader');
+                const statusMessage = document.getElementById('statusMessage');
+                const statusDetail = document.getElementById('statusDetail');
+                const errorContainer = document.getElementById('errorContainer');
+                const errorMessage = document.getElementById('errorMessage');
+                
+                console.log('Code:', code ? 'Present' : 'Missing');
+                console.log('Error:', error);
+                
+                if (error) {
+                    throw new Error(`Spotify authorization failed: ${error}`);
+                }
+                
+                if (!code) {
+                    throw new Error('No authorization code received from Spotify');
+                }
+                
+                statusMessage.textContent = 'Authenticating...';
+                statusDetail.textContent = 'Exchanging authorization code for access token';
+                
+                const csrfToken = getCookie('csrftoken');
+                console.log('CSRF Token:', csrfToken ? 'Present' : 'Missing');
+                console.log('Sending POST request to /api/spotify/connect/');
+                const response = await fetch('/api/spotify/connect/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ 
+                        code: code,
+                        redirect_uri: 'http://127.0.0.1:8000/callback/'
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                if (response.ok) {
+                    loader.style.display = 'none';
+                    statusMessage.textContent = '✓ Successfully Connected!';
+                    statusMessage.style.color = '#1db954';
+                    statusDetail.textContent = data.user ? `Welcome, ${data.user.name}!` : 'Redirecting...';
+                    
+                    const returnTo = sessionStorage.getItem('returnTo') || '/';
+                    console.log('Redirecting to:', returnTo);
+                    
+                    sessionStorage.removeItem('returnTo');
+                    
+                    setTimeout(() => {
+                        window.location.replace(returnTo);
+                    }, 1500);
+                } else {
+                    throw new Error(data.error || data.message || 'Failed to connect Spotify account');
+                }
+                
+            } catch (error) {
+                console.error('Callback error:', error);
+                
+                const loader = document.getElementById('loader');
+                const statusMessage = document.getElementById('statusMessage');
+                const statusDetail = document.getElementById('statusDetail');
+                const errorContainer = document.getElementById('errorContainer');
+                const errorMessage = document.getElementById('errorMessage');
+                
+                loader.style.display = 'none';
+                statusMessage.textContent = '✗ Connection Failed';
+                statusMessage.style.color = '#ff6b6b';
+                statusDetail.textContent = '';
+                
+                errorMessage.textContent = error.message;
+                errorContainer.style.display = 'block';
+            }
+        }
+        
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [cookieName, cookieValue] = cookie.trim().split('=');
+                if (cookieName === name) {
+                    return decodeURIComponent(cookieValue);
+                }
+            }
+            return null;
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleSpotifyCallback);
+        } else {
+            handleSpotifyCallback();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+.auth-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 2rem 1rem;
+}
+
+.auth-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    opacity: 0.5;
+}
+
+.auth-tabs {
+    display: flex;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+.tab-button.active {
+    color: white;
+}
+
+.tab-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.tab-slider.register {
+    transform: translateX(100%);
+}
+
+.auth-form {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.auth-form.active {
+    display: block;
+    opacity: 1;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+}
+
+.auth-form p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.btn-spotify {
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+    margin-bottom: 1rem;
+}
+
+.btn-spotify:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.btn-spotify:active {
+    transform: translateY(0);
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.auth-divider span {
+    background: var(--bg-secondary);
+    padding: 0 15px;
+    position: relative;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .auth-container {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .auth-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .auth-container {
+        max-width: 500px;
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .auth-section {
+        padding: 1rem;
+        min-height: calc(100vh - 100px);
+    }
+    
+    .auth-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 1.5rem 1.25rem;
+        border-radius: 12px;
+    }
+    
+    .auth-tabs {
+        margin-bottom: 1.25rem;
+    }
+    
+    .tab-button {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.85rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .btn-spotify {
+        padding: 13px 18px;
+        font-size: 0.95rem;
+    }
+    
+    .auth-divider {
+        margin: 1.25rem 0;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .auth-section {
+        padding: 0.75rem;
+    }
+    
+    .auth-container {
+        padding: 1.25rem 1rem;
+        border-radius: 10px;
+    }
+    
+    .auth-tabs {
+        padding: 3px;
+        margin-bottom: 1rem;
+    }
+    
+    .tab-button {
+        padding: 9px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .tab-slider {
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+    }
+    
+    .auth-form h2 {
+        font-size: 1.3rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-spotify {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+    
+    .auth-divider {
+        margin: 1rem 0;
+        font-size: 0.75rem;
+    }
+    
+    .auth-divider span {
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .auth-container {
+        padding: 1rem 0.875rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.2rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.75rem;
+    }
+    
+    .btn-spotify {
+        padding: 11px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .auth-section {
+        padding: 1rem;
+        min-height: auto;
+    }
+    
+    .auth-container {
+        padding: 1.25rem 1.5rem;
+        max-width: 500px;
+    }
+    
+    .auth-tabs {
+        margin-bottom: 1rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .auth-form p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-spotify {
+        padding: 11px 18px;
+    }
+    
+    .auth-divider {
+        margin: 1rem 0;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .tab-button {
+        min-height: 44px;
+    }
+    
+    .btn-spotify {
+        min-height: 48px;
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    input, select, textarea, button {
+        font-size: 16px !important;
+    }
+}
+
+[data-theme="light"] .auth-container {
+    background: white;
+    border-color: #dee2e6;
+}
+
+[data-theme="light"] .auth-divider span {
+    background: white;
+}
+
+[data-theme="soft"] .auth-container {
+    background: #fef9f3;
+    border-color: #f3d5d0;
+}
+
+[data-theme="soft"] .auth-divider span {
+    background: #fef9f3;
+}
+
+[data-theme="girly"] .auth-container {
+    background: #fff0f8;
+    border-color: #ffb6e0;
+}
+
+[data-theme="girly"] .auth-divider span {
+    background: #fff0f8;
+}
+
+[data-theme="cool"] .auth-container {
+    background: #132f4c;
+    border-color: #2962ff;
+}
+
+[data-theme="cool"] .auth-divider span {
+    background: #132f4c;
+}
+
+@media (prefers-contrast: high) {
+    .auth-container {
+        border-width: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-form,
+    .tab-slider,
+    .btn-spotify {
+        transition: none !important;
+    }
+}

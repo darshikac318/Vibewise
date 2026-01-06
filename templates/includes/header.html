@@ -1,0 +1,126 @@
+{% load static %}
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="{% static 'assets/images/logo.png' %}" alt="VibeWise">
+            <h1>VibeWise</h1>
+        </div>
+        
+        <nav class="main-nav" id="mainNav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                <li class="nav-item" id="loginNavItem"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                <li class="nav-item" id="profileNavItem" style="display: none;"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-actions">
+            <span id="userNameDisplay" style="display: none; margin-right: 1rem; color: var(--primary-color); font-weight: 600;"></span>
+            <button id="logoutBtn" class="btn-logout" style="display: none;">Logout</button>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<script>
+(function() {
+    'use strict';
+    const savedTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (document.body) {
+        document.body.setAttribute('data-theme', savedTheme);
+    }
+    console.log('⚡ Header: Theme pre-loaded:', savedTheme);
+})();
+</script>
+
+<script>
+(function() {
+    'use strict';
+    
+    async function updateHeaderAuth() {
+        try {
+            const response = await fetch('/api/spotify/status/', {
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            });
+            
+            const data = await response.json();
+            
+            const loginNavItem = document.getElementById('loginNavItem');
+            const profileNavItem = document.getElementById('profileNavItem');
+            const userDisplay = document.getElementById('userNameDisplay');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (data.connected && data.user) {
+                console.log('✅ User logged in:', data.user.name);
+                
+                if (loginNavItem) loginNavItem.style.display = 'none';
+                if (profileNavItem) profileNavItem.style.display = 'block';
+                if (userDisplay) {
+                    userDisplay.textContent = data.user.name || 'User';
+                    userDisplay.style.display = 'inline-block';
+                }
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+            } else {
+                console.log('❌ User not logged in');
+                
+                if (loginNavItem) loginNavItem.style.display = 'block';
+                if (profileNavItem) profileNavItem.style.display = 'none';
+                if (userDisplay) userDisplay.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Header auth check error:', error);
+            const loginNavItem = document.getElementById('loginNavItem');
+            const profileNavItem = document.getElementById('profileNavItem');
+            if (loginNavItem) loginNavItem.style.display = 'block';
+            if (profileNavItem) profileNavItem.style.display = 'none';
+        }
+    }
+    
+    function updateThemeIcon() {
+        const themeIcons = {
+            'dark': '🌙',
+            'light': '☀️',
+            'soft': '🌸',
+            'girly': '💖',
+            'cool': '🌊'
+        };
+        
+        const currentTheme = localStorage.getItem('vibeWiseTheme') || 'dark';
+        const icon = themeIcons[currentTheme] || '🌙';
+        
+        const themeIconElements = document.querySelectorAll('.theme-icon');
+        themeIconElements.forEach(el => {
+            el.textContent = icon;
+        });
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderAuth();
+            updateThemeIcon();
+        });
+    } else {
+        updateHeaderAuth();
+        updateThemeIcon();
+    }
+    
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            updateHeaderAuth();
+            updateThemeIcon();
+        }
+    });
+    
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'vibeWiseTheme') {
+            updateThemeIcon();
+        }
+    });
+})();
+</script>
